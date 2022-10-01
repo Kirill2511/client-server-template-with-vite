@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-const Game: React.FC<IGame> = () => {
+const Game: React.FC = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
     useEffect(() => {
