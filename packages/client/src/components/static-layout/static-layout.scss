@@ -1,0 +1,25 @@
+@import "./../../styles/variables";
+
+.link-to-game {
+  height: 720px;
+  background-color: #FBFBFB;
+  width: 64px;
+  float: left;
+}
+
+.link-to-game::before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.link-to-game__button {
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  background-color: $color-links;
+  display: inline-block;
+  vertical-align: middle;
+}
+
