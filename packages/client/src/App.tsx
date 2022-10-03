@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import Game from './pages/game'
+import Game from './pages/game/game'
 
 function App() {
-  const [IsGameStarted, setIsGameStarted] = useState(false)
   useEffect(() => {
     const fetchServerData = async () => {
       const url = `http://localhost:${__SERVER_PORT__}`
@@ -15,9 +14,7 @@ function App() {
     fetchServerData()
   }, [])
   return <div className="App">
-    Вот тут будет жить ваше приложение :)
-    <button onClick={() => setIsGameStarted(true)}>Начать игру</button>
-    {IsGameStarted && <Game />}
+    <Game />
   </div>
 }
 
