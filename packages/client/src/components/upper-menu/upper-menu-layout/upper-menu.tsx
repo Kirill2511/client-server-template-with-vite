@@ -1,4 +1,5 @@
 import React, { MouseEvent, useState } from 'react'
+import { Route, Link, BrowserRouter, Routes } from 'react-router-dom';
 import {
   MenuItemProps,
   UpperMenuItem,
@@ -9,6 +10,8 @@ import {
   MenuUserInfo,
   UserProps,
 } from '../upper-menu-user-info/upper-menu-user-info'
+import { LeaderPage } from '../../leaderboard/leaderPage/leaderpage';
+import { PhorumMainPage } from '../../phorum/phorum-main-page/phorum-main-page';
 
 function handleClick(e: MouseEvent) {
   e.preventDefault()
@@ -35,23 +38,28 @@ function handleLogout() {
 const menuLinks: MenuItemProps[] = [
   {
     text: 'Мой профиль',
-    link: handleClick,
+    //link: handleClick,
+    link:"/profile",
   },
   {
     text: 'Форум',
-    link: handleClick,
+    //link: handleClick,
+    link: "/phorum",
   },
   {
     text: 'Доска почета',
-    link: handleClick,
+    //link: handleClick,
+    link: "/leaderboard",
   },
   {
     text: 'Настройки',
-    link: handleClick,
+    //link: handleClick,
+    link: "/settings",
   },
   {
     text: 'Как играть',
-    link: handleClick,
+    //link: handleClick,
+    link: "/howto",
   },
 ]
 
@@ -69,6 +77,7 @@ const dummyUser: UserProps = {
 export const UpperMenu: React.FC = () => {
   const [isNight, setIsNight] = useState(false)
   return (
+    
     <div className="upper-menu">
       <MenuUserInfo {...dummyUser} />
 
@@ -80,20 +89,23 @@ export const UpperMenu: React.FC = () => {
           {!isNight && (
             <UpperMenuItem
               text="Ночная тема"
-              link={() => setIsNight(true)}
+              onClick={() => setIsNight(true)}
               key="night"
             />
           )}
           {!!isNight && (
             <UpperMenuItem
               text="Дневная тема"
-              link={() => setIsNight(false)}
+              onClick={() => setIsNight(false)}
               key="night"
             />
           )}
-          <UpperMenuItem text="Выйти" link={handleLogout} key="logout" />
+          <UpperMenuItem text="Выйти" onClick={handleLogout} key="logout" />
         </ul>
       </div>
+
     </div>
+
+
   )
 }

@@ -1,6 +1,7 @@
-//import React from 'react'
+import React from 'react'
 import { LeftPanel } from '../../static-layout/static-layout'
-import { UpperMenu, UserProps } from '../../upper-menu/upper-menu-layout/upper-menu'
+import { UpperMenu } from '../../upper-menu/upper-menu-layout/upper-menu'
+import { UserProps } from '../../upper-menu/upper-menu-user-info/upper-menu-user-info'
 import { LeaderItem, LeaderProps } from '../leader/leader'
 import './leaderpage.scss'
 
@@ -31,34 +32,28 @@ const dummyLeaders: LeaderProps[] = [
     score: '6 373',
   },
   {
-    avatar: '',
+    //avatar: '',
     name: 'СиГиЛлИт',
     score: '2 334',
   },
   {
-    avatar: '',
+    //avatar: '',
     name: 'Демонетка с правого фланга',
     score: '1 432',
   },
 ]
 
-const dummyUser: UserProps = {
-    id: 1,
-    first_name: "Phil",
-    second_name: "Punxatawny",
-    display_name: "",
-    login: "phil",
-    email: "phil@punxatawny.com",
-    phone: "0192837462",
-    avatar: "",
-  };
 
-export const LeaderPage = (props) => {
+  type LeaderPageProps = {
+    title?: string,
+  }
+
+export const LeaderPage: React.FC<LeaderPageProps> = (props) => {
   const title = props.title ? props.title : 'Доска почета'
   return (
     <div className="main-wrapper">
       <LeftPanel />
-      <UpperMenu {...dummyUser} />
+      <UpperMenu />
       <div className="leaderboard-wrapper">
 
         <h3>{title}</h3>

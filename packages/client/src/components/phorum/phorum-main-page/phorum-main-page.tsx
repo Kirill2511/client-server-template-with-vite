@@ -43,6 +43,26 @@ interface PhorumPageProps {
 
 }
 
+function makeNewThread(text: string, author: string) {
+  //const list = document.querySelector(".phorum-thread-list");
+  //list.appendChild(  
+    const date = new Date();
+    const today = JSON.stringify(date);
+    const startDate = today.slice(0, 10);
+    const index = document.getElementsByClassName("phorum-threadlist__item").length;
+
+  return (
+  <PhorumThreadListItem 
+    thread={text} 
+    pageCount={0} 
+    author={author} 
+    startDate={startDate} 
+    replies={"0 ответов"} 
+    lastReplyUser={author} 
+    lastReplyDate={startDate} 
+    key={"thread" + index} />);
+}
+
 
 export const PhorumMainPage: React.FC<PhorumPageProps> = ({
     title = "Форум",
