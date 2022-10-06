@@ -1,55 +1,38 @@
-import React from 'react'
-import { UpperMenuItem } from '../upper-menu-item/upper-menu-item';
-import "./upper-menu.scss";
-import { APIurls, defaulAvatar, filePrefix } from '../../../consts/prefix';
+import React, { MouseEvent, useState } from 'react'
+import {
+  MenuItemProps,
+  UpperMenuItem,
+} from '../upper-menu-item/upper-menu-item'
+import './upper-menu.scss'
+import { APIurls } from '../../../consts/prefix'
+import {
+  MenuUserInfo,
+  UserProps,
+} from '../upper-menu-user-info/upper-menu-user-info'
 
-export type UserProps = {
-  id: number,
-  first_name: string,
-  second_name: string,
-  display_name: string,
-  login: string,
-  email: string,
-  phone: string,
-  avatar: string,
-   
+function handleClick(e: MouseEvent) {
+  e.preventDefault()
+  console.log('CLICK ' + e.currentTarget.textContent)
 }
-
-// interface MenuLinks {
-//   text: string,
-//   link: Function,
-// }
-function handleClick(e: Event) {
-  e.preventDefault();
-  console.log("CLICK" + e.target);
-} 
 
 async function logout() {
   const response = await fetch(APIurls.LOGOUT, {
     method: 'POST',
-    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'include', // include, *same-origin, omit
+    credentials: 'include',
     headers: {
-      'Content-Type': 'application/json'
-      // 'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
     },
-    redirect: 'follow', // manual, *follow, error
-    referrerPolicy: 'no-referrer', // no-referrer, *client
-  });
-  return await response.json(); // parses JSON response into native JavaScript objects
+  })
+  return await response.json()
 }
 
-function handleLogout(e: Event) {
-  e.preventDefault();
-  logout()
-  .then(response => {
-    console.log(response);
+function handleLogout() {
+  logout().then(response => {
+    console.log(response)
   })
 }
 
-
-const menuLinks = [
+const menuLinks: MenuItemProps[] = [
   {
     text: 'Мой профиль',
     link: handleClick,
@@ -60,9 +43,7 @@ const menuLinks = [
   },
   {
     text: 'Доска почета',
-    link: () => {
-      console.log("НУ НАЖАЛИ");
-    },
+    link: handleClick,
   },
   {
     text: 'Настройки',
@@ -72,37 +53,45 @@ const menuLinks = [
     text: 'Как играть',
     link: handleClick,
   },
-  {
-    text: 'Ночная тема',
-    link: handleClick,
-  },
-  {
-    text: 'Выйти',
-    link: handleLogout,
-  },
 ]
 
-export const UpperMenu: React.FC<UserProps> = (props) => {
-  const {avatar, first_name, second_name, display_name} = props;
-  const avatarUrl = avatar
-  ? `${filePrefix}${avatar}`
-  : defaulAvatar;
-  const name = display_name
-  ? display_name
-  : `${first_name} ${second_name}`;
+const dummyUser: UserProps = {
+  id: 1,
+  first_name: 'Phil',
+  second_name: 'Punxatawny',
+  display_name: '',
+  login: 'phil',
+  email: 'phil@punxatawny.com',
+  phone: '0192837462',
+  avatar: '',
+}
+
+export const UpperMenu: React.FC = () => {
+  const [isNight, setIsNight] = useState(false)
   return (
     <div className="upper-menu">
-      <div className="user-info">
-        <div className="user-avatar">
-          <img src={avatarUrl}></img>
-        </div>
-        <div className="user-name">{name}</div>
-      </div>
+      <MenuUserInfo {...dummyUser} />
+
       <div className="menu-list-wrapper">
         <ul className="menu-list">
           {menuLinks.map((item, index) => (
             <UpperMenuItem text={item.text} link={item.link} key={index} />
           ))}
+          {!isNight && (
+            <UpperMenuItem
+              text="Ночная тема"
+              link={() => setIsNight(true)}
+              key="night"
+            />
+          )}
+          {!!isNight && (
+            <UpperMenuItem
+              text="Дневная тема"
+              link={() => setIsNight(false)}
+              key="night"
+            />
+          )}
+          <UpperMenuItem text="Выйти" link={handleLogout} key="logout" />
         </ul>
       </div>
     </div>

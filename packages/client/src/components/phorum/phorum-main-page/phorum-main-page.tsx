@@ -1,20 +1,9 @@
 import React from 'react'
 import { LeftPanel } from '../../static-layout/static-layout'
-import { UpperMenu, UserProps } from '../../upper-menu/upper-menu-layout/upper-menu'
+import { UpperMenu } from '../../upper-menu/upper-menu-layout/upper-menu'
 import { PhorumThreadListItem, ThreadListItemProps } from '../phorum-thread-list-item/phorum-thread-list-item';
 import { MainListHeader } from './phorum-main-list-header/phorum-main-list-header';
 import './phorum-main-page.scss';
-
-const dummyUser: UserProps = {
-    id: 1,
-    first_name: "Phil",
-    second_name: "Punxatawny",
-    display_name: "",
-    login: "phil",
-    email: "phil@punxatawny.com",
-    phone: "0192837462",
-    avatar: "",
-  };
 
 const dummyList: ThreadListItemProps[] = [
   {
@@ -63,9 +52,10 @@ export const PhorumMainPage: React.FC<PhorumPageProps> = ({
   return (
     <div className="main-wrapper">
       <LeftPanel />
-      <UpperMenu {...dummyUser} />
+      <UpperMenu />
     <div className="phorum-wrapper">
       <h3>{title}</h3>
+      <div className="new-thread-wrapper" onClick={() => console.log("ПОКА НЕ УМЕЮ")}>Новая тема</div>
       <MainListHeader />
       <div className="phorum-thread-list-wrapper">
         <ul className="phorum-thread-list">

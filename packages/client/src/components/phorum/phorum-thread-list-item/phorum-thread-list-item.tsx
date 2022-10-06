@@ -1,5 +1,5 @@
 import React from 'react'
-import { PageCount, PageCounter } from '../phorum-page-count/phorum-page-count'
+import { PageCounter } from '../phorum-page-count/phorum-page-count'
 import './phorum-thread-list-item.scss'
 
 export interface ThreadListItemProps {
