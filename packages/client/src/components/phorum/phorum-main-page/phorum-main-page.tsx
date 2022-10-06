@@ -64,6 +64,8 @@ function makeNewThread(text: string, author: string) {
 }
 
 
+
+
 export const PhorumMainPage: React.FC<PhorumPageProps> = ({
     title = "Форум",
 
