@@ -1,0 +1,15 @@
+@import './../../../../styles/variables';
+
+.phorum-header-wrapper {
+    display: grid;
+    grid-template-columns: 6fr 2fr 4fr;
+}
+
+
+//         <div className="phorum-header-wrapper">
+//         <div className="thread__header">{threadHeader}</div>
+//         <div className="replies_header">{repliesHeader}</div>
+//         <div className="last-reply_header">{lastReplyHeader}</div>
+//       </div>
+//     );
+// }

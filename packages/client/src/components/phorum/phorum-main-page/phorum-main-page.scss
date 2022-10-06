@@ -1,0 +1,22 @@
+@import './../../../styles/variables';
+
+.main-wrapper {
+  width: 100%;
+  text-align: center;
+}
+
+.phorum-wrapper {
+  border: 1px solid green;
+  text-align: center;
+}
+
+.phorum-thread-list-wrapper {
+  border: 1px solid red;
+}
+
+.phorum-thread-list {
+  list-style: none;
+  border: 1px solid yellow;
+}
+
+
