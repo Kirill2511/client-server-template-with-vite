@@ -428,7 +428,7 @@ export const start = function () {
     };
 
     Tetromino.prototype.drop = function (board: any) {
-        while (this.move("down", board)) { }
+        while (this.move("down", board)) {/**/ }
         this.kill(board);
     };
 
