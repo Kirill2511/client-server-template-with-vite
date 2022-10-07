@@ -4,6 +4,7 @@ import './styles/style.scss'
 import { Route, Routes } from 'react-router-dom'
 //import { PhorumMainPage } from './pages/Phorum/PhorumMain/phorum-main-page'
 import { LeaderBoardPage } from './pages/LeaderBoardPage/LeaderBoardPage'
+import { PhorumMainPage } from './pages/Phorum/PhorumMainPage/PhorumMainPage'
 
 function App() {
   useEffect(() => {
@@ -20,6 +21,7 @@ function App() {
     <Routes>
   <Route path="/" element={<LeaderBoardPage />} />
   <Route path="/leaderboard" element={<LeaderBoardPage />} />
+  <Route path="/phorum" element={<PhorumMainPage />} />
 
 
 </Routes>

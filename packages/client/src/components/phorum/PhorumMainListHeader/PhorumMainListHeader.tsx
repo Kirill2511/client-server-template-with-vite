@@ -1,5 +1,5 @@
-import React from "react";
-import './phorum-main-list-header.scss';
+import React, { FC } from "react";
+import './PhorumMainListHeader.scss';
 
 interface MainListHeaderProps {
     threadHeader?: string,
@@ -8,7 +8,7 @@ interface MainListHeaderProps {
 
 }
 
-export const MainListHeader: React.FC<MainListHeaderProps> = ({
+export const MainListHeader: FC<MainListHeaderProps> = ({
     threadHeader = "Тема",
     repliesHeader = "Ответов",
     lastReplyHeader = "Последний ответ",

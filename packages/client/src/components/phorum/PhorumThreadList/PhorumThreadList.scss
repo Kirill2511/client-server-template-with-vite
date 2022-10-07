@@ -1,0 +1,58 @@
+@import './../../../styles/variables';
+
+.thread-list__section-header {
+    font-size: 20px;
+
+    &_theme_light {
+        @extend .thread-list__section-header;
+    }
+
+    &_theme_dark {
+        @extend .thread-list__section-header;
+        color: $color-text-dark_theme;
+    }
+}
+
+.new-thread-wrapper {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding-left: 20px;
+
+  }
+
+  .new-thread {
+    display: flex;
+    width: 80%;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+  }
+
+  .new-thread__link {
+    display: flex;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 10px 10px 8px 0;
+
+  }
+
+  .new-thread__input {
+    display: flex;
+    width: 300px;
+    margin-right: 20px;
+}
+
+.new-thread__button {
+    display: flex;
+    margin-right: 20px;
+}
+
+
+
+.phorum__thread-list {
+  list-style: none;
+}
+
+

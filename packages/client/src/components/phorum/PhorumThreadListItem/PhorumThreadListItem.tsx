@@ -1,6 +1,6 @@
-import React from 'react'
-import { PageCounter } from '../phorum-page-count/phorum-page-count'
-import './phorum-thread-list-item.scss'
+import React, { FC } from 'react'
+import { PageCounter } from '../PhorumPageCount/PhorumPageCount'
+import './PhorumThreadListItem.scss'
 
 export interface ThreadListItemProps {
   thread: string
@@ -12,7 +12,7 @@ export interface ThreadListItemProps {
   lastReplyDate: string
 }
 
-export const PhorumThreadListItem: React.FC<ThreadListItemProps> = props => {
+export const PhorumThreadListItem: FC<ThreadListItemProps> = props => {
   const {
     thread,
     pageCount,
@@ -26,7 +26,7 @@ export const PhorumThreadListItem: React.FC<ThreadListItemProps> = props => {
     <li className="phorum-threadlist__item">
       <div className="thread">
         <div className="thread__thread">
-          <span className="thread__header">{thread}</span>{' '}
+          <span className="thread__text">{thread}</span>{' '}
           <PageCounter pages = {pageCount} />
         </div>
         <div className="thread__info">
@@ -35,8 +35,8 @@ export const PhorumThreadListItem: React.FC<ThreadListItemProps> = props => {
       </div>
       <div className="replies">{replies}</div>
       <div className="last-reply">
-        {lastReplyUser}
-        {lastReplyDate}
+        <div className='last-reply__user'>{lastReplyUser}</div>
+        <div className='last-reply__date'>{lastReplyDate}</div>
       </div>
     </li>
   )
