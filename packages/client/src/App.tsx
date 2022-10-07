@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import './App.css'
 import './styles/style.scss'
-import { LeaderPage } from './components/leaderboard/leaderPage/leaderpage'
 import { Route, Routes } from 'react-router-dom'
-import { PhorumMainPage } from './components/phorum/phorum-main-page/phorum-main-page'
+//import { PhorumMainPage } from './pages/Phorum/PhorumMain/phorum-main-page'
+import { LeaderBoardPage } from './pages/LeaderBoardPage/LeaderBoardPage'
 
 function App() {
   useEffect(() => {
@@ -18,9 +18,8 @@ function App() {
   }, [])
   return  (
     <Routes>
-  <Route path="/" element={<LeaderPage />} />
-  <Route path="/phorum" element={<PhorumMainPage />} />
-  <Route path="/leaderboard" element={<LeaderPage />} />
+  <Route path="/" element={<LeaderBoardPage />} />
+  <Route path="/leaderboard" element={<LeaderBoardPage />} />
 
 
 </Routes>
