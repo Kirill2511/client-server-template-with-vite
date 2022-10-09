@@ -4,6 +4,7 @@ import { MenuItemProps, UpperMenuItem } from '../UpperMenuItem/UpperMenuItem';
 import './UpperMenu.scss';
 import { APIurls } from '../../../consts/prefix';
 import { MenuUserInfo, UserProps } from '../UpperMenuUserInfo/UpperMenuUserInfo';
+import { dummyUser } from '../../../consts/dummyData';
 
 async function logout() {
   const response = await fetch(APIurls.LOGOUT, {
@@ -45,16 +46,16 @@ const menuLinks: MenuItemProps[] = [
   },
 ];
 
-const dummyUser: UserProps = {
-  id: 1,
-  first_name: 'Phil',
-  second_name: 'Punxatawny',
-  display_name: '',
-  login: 'phil',
-  email: 'phil@punxatawny.com',
-  phone: '0192837462',
-  avatar: '',
-};
+// const dummyUser: UserProps = {
+//   id: 1,
+//   first_name: 'Phil',
+//   second_name: 'Punxatawny',
+//   display_name: '',
+//   login: 'phil',
+//   email: 'phil@punxatawny.com',
+//   phone: '0192837462',
+//   avatar: '',
+// };
 
 export const UpperMenu: FC = () => {
   const [isNight, setIsNight] = useState(false);

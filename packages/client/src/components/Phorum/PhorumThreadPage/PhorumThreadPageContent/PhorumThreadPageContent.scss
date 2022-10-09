@@ -1,0 +1,10 @@
+@import './../../../../styles/variables';
+
+.thread-wrapper {
+    padding-right: 20px;
+}
+
+.thread {
+    max-height: 426px;
+    overflow-y: auto;
+}

@@ -1,0 +1,54 @@
+@import './../../../../styles/variables';
+
+.reply-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+}
+
+.input__textarea {
+    width: 100%;
+    height: 130px;
+    border: 1px solid $color-lightgray;
+    text-align: start;
+    font-style: italic;
+}
+
+.error-message {
+    height: 15px;
+}
+
+.reply__button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    &_button {
+        width: 200px;
+        height: 40px;
+    }
+}
+
+.reply__button .input {
+    width: 60px;
+}
+
+.reply__button .input__label {
+    width: 30px;
+    height: 30px;
+    background-image: url("./../../../../assets/paperclip-solid.png");
+    background-size: contain;
+    cursor: pointer;
+
+}
+
+.reply__hidden_input {
+    display: inline-block;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    position: absolute;
+    z-index: -10;
+}
+
+

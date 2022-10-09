@@ -2,7 +2,6 @@ import React, { FC, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import { Button } from '../../../Button/Button'
 import { Input } from '../../../Input/Input'
-import { Popup } from '../../../Popup/Popup'
 import { MainListHeader } from '../PhorumMainListHeader/PhorumMainListHeader'
 import {
   PhorumThreadListItem,
@@ -108,17 +107,20 @@ export const PhorumMainPageContent: FC<PhorumThreadListProps> = ({
             Новая тема
           </div>{' '}
           {!!isNew && (
-            <Popup 
-            popupRef="new-thread"
-            title="Новая тема"
-            buttonText="Создать новую тему"
-            onClick={()=> console.log("НУ КЛИК")}
-            showValidation={false}
-            validationText=""
-            className="new-thread__popup">
-              <textarea placeholder="Ваше первое сообщение..."></textarea>
-            </Popup>
-
+            <>
+              <div className="new-thread__input-wrapper">
+                <Input />
+              </div>
+              <div className="new-thread__button-wrapper">
+                <Button
+                  className="new-thread__button"
+                  onClick={() => {
+                    makeNewThread({ text: 'тест', author: 'Я' })
+                  }}>
+                  {'Создать тему'}
+                </Button>
+              </div>
+            </>
           )}
         </div>
       </div>

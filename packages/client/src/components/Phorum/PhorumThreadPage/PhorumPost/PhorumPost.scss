@@ -1,0 +1,40 @@
+@import './../../../../styles/variables';
+
+.post {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    background-color: $color-back-gray;
+    border-bottom: 1px solid white;
+
+    &__userinfo {
+        border-right: 1px solid white;
+    }
+
+    &__avatar {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    &__username {
+        font-weight: bold;
+    }
+
+    &__text-wrapper {
+        padding: 10px;
+    }
+
+    &__text {
+        text-align: start;
+    }
+
+    &__date {
+        text-align: end;
+        color: $color-midgray;
+    }
+}
+
+.post:nth-child(even) {
+    background-color: $color-back-blue;
+}
+
+

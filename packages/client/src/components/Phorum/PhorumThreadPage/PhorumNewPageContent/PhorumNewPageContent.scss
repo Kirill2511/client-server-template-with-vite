@@ -1,0 +1,42 @@
+@import './../../../../styles/variables';
+
+.thread-wrapper {
+    padding-right: 20px;
+    text-align: center;
+}
+
+.thread-name {
+    .input {
+        width: 500px;
+
+        &__label {
+            text-align: left;
+        }
+    }
+}
+
+.thread-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__textarea {
+        width: 500px;
+        height: 150px;
+        border: 1px solid $color-lightgray;
+        font-style: italic;
+    }
+
+    &__button-wrapper {
+        margin-top: 10px;
+        display: flex;
+        width: 500px;
+        justify-content: flex-end;
+
+    }
+
+    &__button {
+        width: fit-content;
+    }
+}
+

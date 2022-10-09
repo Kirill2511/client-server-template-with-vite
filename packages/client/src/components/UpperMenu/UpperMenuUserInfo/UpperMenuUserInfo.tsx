@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { defaulAvatar, filePrefix } from '../../../consts/prefix';
+import { makeUserAvatarFromUser, makeUserNameFromUser } from '../../../utils/makeUserProps';
 import { UserAvatar } from '../../UserAvatar/UserAvatar';
 import './UpperMenuUserInfo.scss';
 
@@ -16,10 +17,12 @@ export type UserProps = {
 
 export const MenuUserInfo: FC<UserProps> = (props) => {
   // eslint-disable-next-line camelcase
-  const { avatar, first_name, second_name, display_name } = props;
-  const avatarUrl = avatar ? `${filePrefix}${avatar}` : defaulAvatar;
+  //const { avatar, first_name, second_name, display_name } = props;
+  //const avatarUrl = avatar ? `${filePrefix}${avatar}` : defaulAvatar;
   // eslint-disable-next-line camelcase
-  const name = display_name ? display_name : `${first_name} ${second_name}`;
+  //const name = display_name ? display_name : `${first_name} ${second_name}`;
+  const avatarUrl = makeUserAvatarFromUser(props);
+  const name = makeUserNameFromUser(props);
 
   return (
     <div className="user-info">
