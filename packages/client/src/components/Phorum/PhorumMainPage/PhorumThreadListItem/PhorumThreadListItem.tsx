@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { PageCounter } from '../PhorumPageCount/PhorumPageCount'
+import { PageCounter } from '../../PhorumPageCount/PhorumPageCount'
 import './PhorumThreadListItem.scss'
 
 export interface ThreadListItemProps {

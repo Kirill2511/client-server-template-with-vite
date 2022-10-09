@@ -1,10 +1,8 @@
 import React from 'react'
-import { MainListHeader } from '../../../components/phorum/PhorumMainListHeader/PhorumMainListHeader';
-import { PhorumThreadList } from '../../../components/phorum/PhorumThreadList/PhorumThreadList';
+import { PhorumMainPageContent } from '../../../components/Phorum/PhorumMainPage/PhorumMainPageContent/PhorumMainPageContent';
 
-import { PhorumThreadListItem, ThreadListItemProps } from '../../../components/phorum/PhorumThreadListItem/PhorumThreadListItem';
-import { LeftPanel, StaticLayout } from '../../../components/StaticLayout/StaticLayout';
-import { UpperMenu } from '../../../components/UpperMenu/UpperMenu/UpperMenu';
+
+import { StaticLayout } from '../../../components/StaticLayout/StaticLayout';
 
 import './PhorumMainPage.scss';
 
@@ -71,7 +69,7 @@ interface PhorumPageProps {
 export const PhorumMainPage: React.FC<PhorumPageProps> = () => {
 
   return (
-    <StaticLayout><PhorumThreadList /></StaticLayout>
+    <StaticLayout><PhorumMainPageContent /></StaticLayout>
     
   )
 }

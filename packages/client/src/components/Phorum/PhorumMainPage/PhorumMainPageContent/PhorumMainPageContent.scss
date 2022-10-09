@@ -1,4 +1,4 @@
-@import './../../../styles/variables';
+@import './../../../../styles/variables';
 
 .thread-list__section-header {
     font-size: 20px;
@@ -13,9 +13,19 @@
     }
 }
 
+.phorum-thread-list {
+  overflow-y: auto;
+}
+
+.thread-list__list {
+  list-style: none;
+  padding: 0;
+}
+
 .new-thread-wrapper {
     display: block;
     width: 100%;
+    height: 50px;
     text-align: left;
     padding-left: 20px;
 
@@ -24,6 +34,7 @@
   .new-thread {
     display: flex;
     width: 80%;
+    height: 50px;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-end;
@@ -38,18 +49,21 @@
 
   }
 
-  .new-thread__input {
+  .new-thread__input-wrapper {
     display: flex;
     width: 300px;
     margin-right: 20px;
 }
 
-.new-thread__button {
+.new-thread__button-wrapper {
     display: flex;
     margin-right: 20px;
 }
 
-
+.new-thread__button {
+  height: 30px;
+  margin-bottom: 10px;
+}
 
 .phorum__thread-list {
   list-style: none;
