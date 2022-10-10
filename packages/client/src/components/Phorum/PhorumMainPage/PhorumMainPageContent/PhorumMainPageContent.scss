@@ -69,4 +69,36 @@
   list-style: none;
 }
 
+.popup-background {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+
+  position: absolute;
+  top: 0px;
+  z-index: 1050;
+  background-color: rgba(0, 0, 0, .2);
+}
+
+.new-thread__popup {
+  margin: 200px auto 100px;
+  height: fit-content;
+  z-index: 1060;
+  position: absolute;
+  top: 0;
+  left: calc((100vw - 400px)/2);
+
+  .input__label {
+    text-align: start;
+  }
+}
+
+.new-thread__textarea {
+  border: 1px solid $color-lightgray;
+  height: 100px;
+  margin-bottom: 10px;
+  color: $color-midgray;
+  font-style: italic;
+}
 

@@ -1,6 +1,6 @@
-import React, { FC, useState } from 'react'
-import ReactDOM from 'react-dom/client'
-import { Button } from '../../../Button/Button'
+import React, { FC, useRef, useState } from 'react'
+//import ReactDOM from 'react-dom/client'
+//import { Button } from '../../../Button/Button'
 import { Input } from '../../../Input/Input'
 import { Popup } from '../../../Popup/Popup'
 import { MainListHeader } from '../PhorumMainListHeader/PhorumMainListHeader'
@@ -44,25 +44,25 @@ const dummyList: ThreadListItemProps[] = [
   },
 ]
 
-type MakeNewThreadProps = {
-  text: string
-  author: string
-}
+// type MakeNewThreadProps = {
+//   text: string
+//   author: string
+// }
 
-function makeNewThread(props: MakeNewThreadProps) {
-  const { text, author } = props
-  const startDate = new Date().toLocaleDateString('ru')
-  dummyList.push({
-    thread: text,
-    pageCount: 0,
-    author: author,
-    startDate: startDate,
-    replies: '0 ответов',
-    lastReplyUser: author,
-    lastReplyDate: startDate,
-  })
-  MakeThreadList()
-}
+// function makeNewThread(props: MakeNewThreadProps) {
+//   const { text, author } = props
+//   const startDate = new Date().toLocaleDateString('ru')
+//   dummyList.push({
+//     thread: text,
+//     pageCount: 0,
+//     author: author,
+//     startDate: startDate,
+//     replies: '0 ответов',
+//     lastReplyUser: author,
+//     lastReplyDate: startDate,
+//   })
+//   MakeThreadList()
+// }
 
 export const ThreadList = () => {
   return (
@@ -83,20 +83,22 @@ export const ThreadList = () => {
   )
 }
 
-let root: ReactDOM.Root | undefined = undefined
+//let root: ReactDOM.Root | undefined = undefined
 
-function MakeThreadList() {
-root?.unmount();
-root = ReactDOM.createRoot(
-          document.querySelector('.thread-list__wrapper') as HTMLElement
-        );
-  root.render(ThreadList());
-}
+// function MakeThreadList() {
+// root?.unmount();
+// root = ReactDOM.createRoot(
+//           document.querySelector('.thread-list__wrapper') as HTMLElement
+//         );
+//   root.render(ThreadList());
+// }
+
 
 export const PhorumMainPageContent: FC<PhorumThreadListProps> = ({
   title = 'Форум',
 }) => {
-  const [isNew, setIsNew] = useState(false)
+  const [isNew, setIsNew] = useState(false);
+  const popupElem = useRef() as React.MutableRefObject<HTMLInputElement>;
   return (
     <div className="phorum-wrapper">
       <h3 className="thread-list__section-header">{title}</h3>
@@ -107,19 +109,7 @@ export const PhorumMainPageContent: FC<PhorumThreadListProps> = ({
             onClick={() => (isNew ? setIsNew(false) : setIsNew(true))}>
             Новая тема
           </div>{' '}
-          {!!isNew && (
-            <Popup 
-            popupRef="new-thread"
-            title="Новая тема"
-            buttonText="Создать новую тему"
-            onClick={()=> console.log("НУ КЛИК")}
-            showValidation={false}
-            validationText=""
-            className="new-thread__popup">
-              <textarea placeholder="Ваше первое сообщение..."></textarea>
-            </Popup>
 
-          )}
         </div>
       </div>
       <div className="phorum-thread-list">
@@ -128,6 +118,24 @@ export const PhorumMainPageContent: FC<PhorumThreadListProps> = ({
           <ThreadList />
         </div>
       </div>
+      
+      {!!isNew && (
+
+            <Popup 
+            popupRef={popupElem}
+            title="Новая тема"
+            buttonText="Создать новую тему"
+            onClick={()=> console.log("НУ КЛИК")}
+            showValidation={false}
+            validationText=""
+            className="new-thread__popup">
+              <Input label="Название темы"/>
+              <textarea className='new-thread__textarea' placeholder="Ваше первое сообщение..."></textarea>
+            </Popup>
+
+
+          )}
+          {!!isNew &&  <div className='popup-background' onClick={() => setIsNew(false)}></div>}
     </div>
   )
 }
