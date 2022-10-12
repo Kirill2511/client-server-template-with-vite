@@ -1,0 +1,20 @@
+@import '_variables';
+
+.link {
+  display: block;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+
+  &_blue {
+    color: $link-light-blue-color;
+  }
+
+  &_black {
+    color: $link-light-black-color;
+  }
+
+  &_red {
+    color: $link-light-red-color;
+  }
+}

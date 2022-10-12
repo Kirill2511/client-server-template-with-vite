@@ -1,12 +1,24 @@
 @import '_variables';
 
 .avatar {
-  border-radius: 100px;
-  width: 130px;
-  height: 130px;
-  margin: 60px auto 0;
-  padding: 0;
-  cursor: pointer;
+  &__img-wrapper {
+    border-radius: 100px;
+    width: 130px;
+    height: 130px;
+    margin: auto;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  &__img-wrapper:hover {
+    .avatar__img {
+      filter: brightness(0.7);
+    }
+    .avatar__text {
+      color: $avatar-light-text-color;
+    }
+  }
+
   &__img {
     border-radius: 100px;
     width: 100%;
@@ -22,13 +34,12 @@
     color: transparent;
     font-size: 13px;
   }
-}
 
-.avatar:hover {
-  .avatar__img {
-    filter: brightness(0.7);
-  }
-  .avatar__text {
-    color: $avatar-light-text-color;
+  &__person-name {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: $avatar-light-name-color;
   }
 }

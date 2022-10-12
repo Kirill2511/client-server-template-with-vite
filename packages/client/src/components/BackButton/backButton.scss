@@ -1,0 +1,16 @@
+@import '_variables';
+
+.back-button {
+  display: flex;
+  background: $back-button-light-background-color;
+  border-right: 1px solid $back-button-light-border-color;
+  position: absolute;
+  top: 0;
+  width: 64px;
+  height: 100%;
+
+  &__img {
+    display: block;
+    margin: auto;
+  }
+}
