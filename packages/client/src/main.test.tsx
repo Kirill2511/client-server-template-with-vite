@@ -1,17 +1,14 @@
-import { render } from '@testing-library/react';
 import React from 'react';
-import { Provider } from 'react-redux';
-import { store } from './redux/store';
 import App from './App';
+import { render, screen } from '@testing-library/react';
 
-test('render learn react link', () => {
-  const { getByText } = render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </React.StrictMode>,
-  );
+const appContent = 'Вот тут будет жить ваше приложение :)';
 
-  expect(getByText(/learn/i)).toBeInTheDocument();
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+global.fetch = jest.fn(() => Promise.resolve({ json: () => Promise.resolve('hey') }));
+
+test('Example test', async () => {
+  render(<App />);
+  expect(screen.getByText(appContent)).toBeDefined();
 });
