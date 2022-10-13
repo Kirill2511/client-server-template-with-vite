@@ -6,7 +6,6 @@ export const PhorumPostList: FC<PhorumPostProps[]> = (
   postList: PhorumPostProps[]
 ) => {
   const list = Object.values(postList)
-  console.log(list)
 
   return (
     <ul className="post__list">
@@ -16,6 +15,8 @@ export const PhorumPostList: FC<PhorumPostProps[]> = (
           userName={item.userName}
           text={item.text}
           postDate={item.postDate}
+          id={item.id}
+          className={item.className}
           key={'post' + index}
         />
       ))}

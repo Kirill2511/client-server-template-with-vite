@@ -4,9 +4,9 @@ import React, { FC, useRef, useState } from 'react'
 import { Input } from '../../../Input/Input'
 import { Popup } from '../../../Popup/Popup'
 import { MainListHeader } from '../PhorumMainListHeader/PhorumMainListHeader'
+import { ThreadList } from '../PhorumThreadList/PhorumThreadList'
 import {
-  PhorumThreadListItem,
-  ThreadListItemProps,
+    ThreadListItemProps,
 } from '../PhorumThreadListItem/PhorumThreadListItem'
 import './PhorumMainPageContent.scss'
 
@@ -44,56 +44,6 @@ const dummyList: ThreadListItemProps[] = [
   },
 ]
 
-// type MakeNewThreadProps = {
-//   text: string
-//   author: string
-// }
-
-// function makeNewThread(props: MakeNewThreadProps) {
-//   const { text, author } = props
-//   const startDate = new Date().toLocaleDateString('ru')
-//   dummyList.push({
-//     thread: text,
-//     pageCount: 0,
-//     author: author,
-//     startDate: startDate,
-//     replies: '0 ответов',
-//     lastReplyUser: author,
-//     lastReplyDate: startDate,
-//   })
-//   MakeThreadList()
-// }
-
-export const ThreadList = () => {
-  return (
-    <ul className="thread-list__list">
-      {dummyList.map((item, index) => (
-        <PhorumThreadListItem
-          thread={item.thread}
-          pageCount={item.pageCount}
-          author={item.author}
-          startDate={item.startDate}
-          replies={item.replies}
-          lastReplyUser={item.lastReplyUser}
-          lastReplyDate={item.lastReplyDate}
-          key={'thread' + index}
-        />
-      ))}
-    </ul>
-  )
-}
-
-//let root: ReactDOM.Root | undefined = undefined
-
-// function MakeThreadList() {
-// root?.unmount();
-// root = ReactDOM.createRoot(
-//           document.querySelector('.thread-list__wrapper') as HTMLElement
-//         );
-//   root.render(ThreadList());
-// }
-
-
 export const PhorumMainPageContent: FC<PhorumThreadListProps> = ({
   title = 'Форум',
 }) => {
@@ -115,7 +65,7 @@ export const PhorumMainPageContent: FC<PhorumThreadListProps> = ({
       <div className="phorum-thread-list">
         <MainListHeader />
         <div className="thread-list__wrapper">
-          <ThreadList />
+          <ThreadList {...dummyList} />
         </div>
       </div>
       

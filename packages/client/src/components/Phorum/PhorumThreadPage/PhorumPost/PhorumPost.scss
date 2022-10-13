@@ -13,10 +13,12 @@
     &__avatar {
         max-width: 100px;
         max-height: 100px;
+        cursor: pointer;
     }
 
     &__username {
         font-weight: bold;
+        cursor: pointer;
     }
 
     &__text-wrapper {

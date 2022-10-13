@@ -18,7 +18,7 @@ export const Reply: FC<ReplyProps> = ({
   return (
     <div className="reply-wrapper">
       <div className="placeholder"></div>
-      <div className="reply">
+      <form className="reply">
         <div className="reply__input">
           <textarea
             className="input__textarea"
@@ -35,7 +35,7 @@ export const Reply: FC<ReplyProps> = ({
             {buttonContent}
           </Button>
         </div>
-      </div>
+      </form>
     </div>
   )
 }
