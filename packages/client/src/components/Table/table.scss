@@ -1,19 +1,12 @@
-@import '_variables';
-
 .table {
   width: 100%;
-  display: block;
   padding: 0 100px;
-  border: none;
-  border-spacing: 0;
-  table-layout: fixed;
   font-size: 15px;
 
   &__row {
     display: flex;
-    box-sizing: border-box;
     margin: 0;
-    border-bottom: 1px solid $table-light-border-color;
+    border-bottom: 1px solid var(--color-lightgray);
   }
 
   &__row:last-child {
@@ -21,15 +14,13 @@
   }
 
   &__cell {
-    width: 50%;
-    border: none;
-    vertical-align: middle;
     padding: 10px 0;
-    color: $table-light-left-column-text-color;
+    width: 50%;
+    color: var(--color-messages);
   }
 
   &__cell:nth-child(even) {
     text-align: right;
-    color: $table-light-right-column-text-color;
+    color: var(--color-midgray);
   }
 }

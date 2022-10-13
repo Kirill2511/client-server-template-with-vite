@@ -1,5 +1,3 @@
-@import '_variables';
-
 .link {
   display: block;
   font-size: 13px;
@@ -7,14 +5,14 @@
   cursor: pointer;
 
   &_blue {
-    color: $link-light-blue-color;
+    color: var(--color-links);
   }
 
   &_black {
-    color: $link-light-black-color;
+    color: var(--color-messages);
   }
 
   &_red {
-    color: $link-light-red-color;
+    color: var(--color-danger);
   }
 }

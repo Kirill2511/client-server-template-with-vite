@@ -1,7 +1,7 @@
 import React, { BaseSyntheticEvent, useCallback, useState, FC, useRef, useEffect } from 'react';
 import classNames from 'classnames';
 
-import { Avatar } from '../../components/Avatar/Avatar';
+import { AvatarLg } from '../../components/AvatarLg/AvatarLg';
 import { Popup } from '../../components/Popup/Popup';
 import { BackgroundBlur } from '../../components/BackgroundBlur/BackgroundBlur';
 
@@ -86,7 +86,7 @@ export const Profile: FC<ProfilePageProps> = ({ profileData }) => {
   return (
     <div className="profile-page">
       <BackButton to="/" />
-      <Avatar avatarPath={avatarPath} onClick={handleAvatarClick} name={firstName} className="profile__avatar" />
+      <AvatarLg avatarPath={avatarPath} onClick={handleAvatarClick} name={firstName} className="profile__avatar" />
       {popupVisible && (
         <BackgroundBlur onClick={handleScreenClick}>
           <Popup

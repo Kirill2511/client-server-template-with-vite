@@ -1,6 +1,4 @@
-@import '_variables';
-
-.avatar {
+.avatar-lg {
   &__img-wrapper {
     border-radius: 100px;
     width: 130px;
@@ -10,13 +8,12 @@
     cursor: pointer;
   }
 
-  &__img-wrapper:hover {
-    .avatar__img {
-      filter: brightness(0.7);
-    }
-    .avatar__text {
-      color: $avatar-light-text-color;
-    }
+  &__img-wrapper:hover .profile-avatar__img {
+    filter: brightness(0.7);
+  }
+
+  &__img-wrapper:hover .profile-avatar__text {
+    color: var(--color-white);
   }
 
   &__img {
@@ -40,6 +37,6 @@
     margin: 20px 0;
     font-size: 16px;
     font-weight: 600;
-    color: $avatar-light-name-color;
+    color: var(--color-messages)
   }
 }

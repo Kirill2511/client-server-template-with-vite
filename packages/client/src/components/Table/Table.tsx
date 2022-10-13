@@ -9,7 +9,7 @@ type TableProps = {
 };
 
 export const Table: FC<TableProps> = ({ children, className }) => {
-  return <table className={classNames(className, 'table')}>{children}</table>;
+  return <div className={classNames(className, 'table')}>{children}</div>;
 };
 
 type TableRowProps = {
@@ -18,7 +18,7 @@ type TableRowProps = {
 };
 
 export const TableRow: FC<TableRowProps> = ({ children, className }) => {
-  return <tr className={classNames(className, 'table__row')}>{children}</tr>;
+  return <div className={classNames(className, 'table__row')}>{children}</div>;
 };
 
 type TableCellProps = {
@@ -27,5 +27,5 @@ type TableCellProps = {
 };
 
 export const TableCell: FC<TableCellProps> = ({ children, className }) => {
-  return <td className={classNames(className, 'table__cell')}>{children}</td>;
+  return <div className={classNames(className, 'table__cell')}>{children}</div>;
 };
