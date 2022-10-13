@@ -5,9 +5,7 @@ import { Input } from '../../../Input/Input'
 import { Popup } from '../../../Popup/Popup'
 import { MainListHeader } from '../PhorumMainListHeader/PhorumMainListHeader'
 import { ThreadList } from '../PhorumThreadList/PhorumThreadList'
-import {
-    ThreadListItemProps,
-} from '../PhorumThreadListItem/PhorumThreadListItem'
+import { ThreadListItemProps } from '../PhorumThreadListItem/PhorumThreadListItem'
 import './PhorumMainPageContent.scss'
 
 type PhorumThreadListProps = {
@@ -47,8 +45,8 @@ const dummyList: ThreadListItemProps[] = [
 export const PhorumMainPageContent: FC<PhorumThreadListProps> = ({
   title = 'Форум',
 }) => {
-  const [isNew, setIsNew] = useState(false);
-  const popupElem = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const [isNew, setIsNew] = useState(false)
+  const popupElem = useRef() as React.MutableRefObject<HTMLInputElement>
   return (
     <div className="phorum-wrapper">
       <h3 className="thread-list__section-header">{title}</h3>
@@ -59,7 +57,6 @@ export const PhorumMainPageContent: FC<PhorumThreadListProps> = ({
             onClick={() => (isNew ? setIsNew(false) : setIsNew(true))}>
             Новая тема
           </div>{' '}
-
         </div>
       </div>
       <div className="phorum-thread-list">
@@ -68,24 +65,25 @@ export const PhorumMainPageContent: FC<PhorumThreadListProps> = ({
           <ThreadList {...dummyList} />
         </div>
       </div>
-      
+
       {!!isNew && (
-
-            <Popup 
-            popupRef={popupElem}
-            title="Новая тема"
-            buttonText="Создать новую тему"
-            onClick={()=> console.log("НУ КЛИК")}
-            showValidation={false}
-            validationText=""
-            className="new-thread__popup">
-              <Input label="Название темы"/>
-              <textarea className='new-thread__textarea' placeholder="Ваше первое сообщение..."></textarea>
-            </Popup>
-
-
-          )}
-          {!!isNew &&  <div className='popup-background' onClick={() => setIsNew(false)}></div>}
+        <Popup
+          popupRef={popupElem}
+          title="Новая тема"
+          buttonText="Создать новую тему"
+          onClick={() => console.log('НУ КЛИК')}
+          showValidation={false}
+          validationText=""
+          className="new-thread__popup">
+          <Input label="Название темы" />
+          <textarea
+            className="new-thread__textarea"
+            placeholder="Ваше первое сообщение..."></textarea>
+        </Popup>
+      )}
+      {!!isNew && (
+        <div className="popup-background" onClick={() => setIsNew(false)}></div>
+      )}
     </div>
   )
 }
