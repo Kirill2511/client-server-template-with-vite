@@ -1,16 +1,16 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
 import defaultAvatar from '../../assets/avatar.svg';
 
 import './avatarLg.scss';
 
-type AvatarLgProps = {
+interface AvatarLgProps extends PropsWithChildren {
   avatarPath?: string;
   onClick: () => void;
   className?: string;
   name?: string;
-};
+}
 
 export const AvatarLg: FC<AvatarLgProps> = ({ avatarPath, onClick, name, className }) => {
   return (

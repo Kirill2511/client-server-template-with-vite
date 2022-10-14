@@ -10,7 +10,7 @@ import { Link } from '../../components/Link/Link';
 import { Table, TableCell, TableRow } from '../../components/Table/Table';
 import { BackButton } from '../../components/BackButton/BackButton';
 
-type ProfilePageProps = {
+interface ProfilePageProps {
   profileData?: {
     firstName: string;
     lastName: string;
@@ -20,7 +20,7 @@ type ProfilePageProps = {
     displayName: string;
     avatarPath: string;
   };
-};
+}
 
 // TODO: брать из стора
 const data = {
@@ -86,7 +86,7 @@ export const Profile: FC<ProfilePageProps> = ({ profileData }) => {
   return (
     <div className="profile-page">
       <BackButton to="/" />
-      <AvatarLg avatarPath={avatarPath} onClick={handleAvatarClick} name={firstName} className="profile__avatar" />
+      <AvatarLg avatarPath={avatarPath} onClick={handleAvatarClick} name={firstName} className="profile-page__avatar" />
       {popupVisible && (
         <BackgroundBlur onClick={handleScreenClick}>
           <Popup
@@ -108,7 +108,7 @@ export const Profile: FC<ProfilePageProps> = ({ profileData }) => {
         </BackgroundBlur>
       )}
 
-      <Table className="profile__table">
+      <Table className="profile-page__table">
         <TableRow>
           <TableCell> Почта </TableCell>
           <TableCell> {email} </TableCell>
@@ -135,7 +135,7 @@ export const Profile: FC<ProfilePageProps> = ({ profileData }) => {
         </TableRow>
       </Table>
 
-      <Table className="profile__table">
+      <Table className="profile-page__table">
         <TableRow>
           <TableCell>
             <Link to="/" color="blue">

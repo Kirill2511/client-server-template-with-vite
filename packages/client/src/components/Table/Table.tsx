@@ -1,30 +1,27 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
 import './table.scss';
 
-type TableProps = {
+interface TableProps extends PropsWithChildren {
   className?: string;
-  children: React.ReactNode;
-};
+}
 
 export const Table: FC<TableProps> = ({ children, className }) => {
   return <div className={classNames(className, 'table')}>{children}</div>;
 };
 
-type TableRowProps = {
+interface TableRowProps extends PropsWithChildren {
   className?: string;
-  children: React.ReactNode;
-};
+}
 
 export const TableRow: FC<TableRowProps> = ({ children, className }) => {
   return <div className={classNames(className, 'table__row')}>{children}</div>;
 };
 
-type TableCellProps = {
+interface TableCellProps extends PropsWithChildren {
   className?: string;
-  children: React.ReactNode | string;
-};
+}
 
 export const TableCell: FC<TableCellProps> = ({ children, className }) => {
   return <div className={classNames(className, 'table__cell')}>{children}</div>;

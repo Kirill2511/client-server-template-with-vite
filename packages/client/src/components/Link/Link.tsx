@@ -1,15 +1,14 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 
 import './link.scss';
 
-type LinkProps = {
+interface LinkProps extends PropsWithChildren {
   to: string;
   color?: 'black' | 'blue' | 'red';
-  children?: React.ReactNode | string;
   className?: string;
-};
+}
 
 export const Link: FC<LinkProps> = ({ color = 'blue', to, children, className }) => {
   return (
