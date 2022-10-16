@@ -46,7 +46,7 @@ export const PhorumMainPageContent: FC<PhorumThreadListProps> = ({
   title = 'Форум',
 }) => {
   const [isNew, setIsNew] = useState(false)
-  const popupElem = useRef() as React.MutableRefObject<HTMLInputElement>
+  const popupElem = useRef() as React.MutableRefObject<HTMLInputElement>;
   return (
     <div className="phorum-wrapper">
       <h3 className="thread-list__section-header">{title}</h3>

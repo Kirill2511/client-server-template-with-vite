@@ -15,6 +15,7 @@ export const Reply: FC<ReplyProps> = ({
   InputErrorText = 'HTML-теги запрещены!',
 }) => {
   const [isError, setError] = useState(false)
+  // TODO: поставить проверку на нал. сообщения и только тогда включать кнопку
   return (
     <div className="reply-wrapper">
       <div className="placeholder"></div>
@@ -25,11 +26,12 @@ export const Reply: FC<ReplyProps> = ({
             placeholder={InputPlaceholder}></textarea>
           <div className="error-message">{isError && InputErrorText}</div>
         </div>
-        <div className="reply__button">
+        <div className="reply__button"> 
           <Input type="file" className="reply__hidden_input" />
           <Button
             className="reply__button_button"
             onClick={() => {
+              //TODO: поставить проверку на наличие сообщения?
               console.log('ТУТ БУДЕТ ОТПРАВКА СООБЩЕНИЯ')
             }}>
             {buttonContent}
