@@ -1,14 +1,8 @@
-import React, { BaseSyntheticEvent, useCallback, useState, FC, useRef, useEffect } from 'react';
-import classNames from 'classnames';
+import React, { FC } from 'react';
 
-import { AvatarLg } from '../../components/AvatarLg/AvatarLg';
-import { Popup } from '../../components/Popup/Popup';
-import { BackgroundBlur } from '../../components/BackgroundBlur/BackgroundBlur';
-
-import './Profile.scss';
 import { Link } from '../../components/Link/Link';
 import { Table, TableCell, TableRow } from '../../components/Table/Table';
-import { BackButton } from '../../components/BackButton/BackButton';
+import { ProfileLayout } from '../../components/ProfileLayout/ProfileLayout';
 
 interface ProfilePageProps {
   profileData?: {
@@ -22,7 +16,6 @@ interface ProfilePageProps {
   };
 }
 
-// TODO: брать из стора
 const data = {
   firstName: 'Иван',
   lastName: 'Иванов',
@@ -36,78 +29,9 @@ const data = {
 export const Profile: FC<ProfilePageProps> = ({ profileData }) => {
   profileData = data; // TODO: брать из стора
   const { firstName, lastName, login, email, phone, displayName, avatarPath } = profileData;
-  const [title, setTitle] = useState('Загрузите файл');
-  const [labelText, setLabelText] = useState('Выбрать файл на компьютере');
-  const [file, setFile] = useState<File | undefined>(undefined);
-  const [showValidation, setShowValidation] = useState(false);
-  const [popupVisible, setPopupVisible] = useState(false);
-
-  const popupElem = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const inputElem = useRef() as React.MutableRefObject<HTMLInputElement>;
-
-  const handleAvatarClick = useCallback(() => {
-    setPopupVisible(true);
-  }, []);
-
-  useEffect(() => {
-    if (inputElem.current) {
-      inputElem.current.addEventListener('change', (event) => {
-        const file: File | null = ((event.currentTarget as HTMLInputElement).files as FileList)[0];
-        if (file) {
-          setTitle('Файл загружен');
-          setFile(file);
-          setLabelText(file?.name);
-          setShowValidation(false);
-        }
-      });
-    }
-  }, [popupVisible]);
-
-  const handleScreenClick = useCallback((event: BaseSyntheticEvent) => {
-    const withinBoundaries = (event.nativeEvent as Record<string, HTMLInputElement[]>).path.includes(popupElem.current);
-
-    if (!withinBoundaries) {
-      setPopupVisible(false);
-      setShowValidation(false);
-      setFile(undefined);
-      setLabelText('Выбрать файл на компьютере');
-      setTitle('Загрузите файл');
-    }
-  }, []);
-
-  const handleButtonSubmit = useCallback(() => {
-    if (!file) {
-      setShowValidation(true);
-    } else {
-      // send data
-    }
-  }, [file]);
 
   return (
-    <div className="profile-page">
-      <BackButton to="/" />
-      <AvatarLg avatarPath={avatarPath} onClick={handleAvatarClick} name={firstName} className="profile-page__avatar" />
-      {popupVisible && (
-        <BackgroundBlur onClick={handleScreenClick}>
-          <Popup
-            popupRef={popupElem}
-            onClick={handleButtonSubmit}
-            title={title}
-            buttonText="Поменять"
-            showValidation={showValidation}
-            validationText="Нужно выбрать файл"
-          >
-            <input ref={inputElem} type="file" id="popup__input" className="popup__input" />
-            <label
-              htmlFor="popup__input"
-              className={classNames(file ? 'popup__label_grey' : 'popup__label_blue', 'popup__label')}
-            >
-              {labelText}
-            </label>
-          </Popup>
-        </BackgroundBlur>
-      )}
-
+    <ProfileLayout firstName={firstName} avatarPath={avatarPath}>
       <Table className="profile-page__table">
         <TableRow>
           <TableCell> Почта </TableCell>
@@ -134,18 +58,17 @@ export const Profile: FC<ProfilePageProps> = ({ profileData }) => {
           <TableCell> {phone} </TableCell>
         </TableRow>
       </Table>
-
       <Table className="profile-page__table">
         <TableRow>
           <TableCell>
-            <Link to="/" color="blue">
+            <Link to="/profile/change-info" color="blue">
               Изменить данные
             </Link>
           </TableCell>
         </TableRow>
         <TableRow>
           <TableCell>
-            <Link to="/" color="blue">
+            <Link to="/profile/change-password" color="blue">
               Изменить пароль
             </Link>
           </TableCell>
@@ -158,7 +81,7 @@ export const Profile: FC<ProfilePageProps> = ({ profileData }) => {
           </TableCell>
         </TableRow>
       </Table>
-    </div>
+    </ProfileLayout>
   );
 };
 
