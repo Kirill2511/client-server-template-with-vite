@@ -1,6 +1,5 @@
 import React, { FC } from "react";
-import { PhorumThreadListItem, ThreadListItemProps } from "../PhorumThreadListItem/PhorumThreadListItem";
-import './PhorumThreadList.scss';
+import { PhorumThreadListItem, ThreadListItemProps } from "../__ThreadListItem/PhorumThreadListItem";
 
 export const ThreadList: FC<ThreadListItemProps[]> = (list: ThreadListItemProps[]) => {
   const postList = Object.values(list);

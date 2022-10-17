@@ -6,6 +6,7 @@
   width: 64px;
   float: left;
   border-right: 1px solid $color-moregrey;
+  // transform: translateX(-64px);
 
   &_theme_light {
     @extend .link-to-game;

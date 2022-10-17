@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { PageCounter } from '../../PhorumPageCount/PhorumPageCount'
+import { PageCounter } from '../../__PageCount/PhorumPageCount'
 import './PhorumThreadListItem.scss'
 
 export interface ThreadListItemProps {
@@ -23,7 +23,7 @@ export const PhorumThreadListItem: FC<ThreadListItemProps> = props => {
     startDate,
   } = props
   return (
-    <li className="phorum-threadlist__item">
+    <li className="thread-list__item">
       <div className="thread">
         <div className="thread__thread">
           <span className="thread__text">{thread}</span>{' '}

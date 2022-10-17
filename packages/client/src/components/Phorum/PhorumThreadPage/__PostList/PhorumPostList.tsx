@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { PhorumPost, PhorumPostProps } from '../PhorumPost/PhorumPost'
+import { PhorumPost, PhorumPostProps } from '../__Post/PhorumPost'
 import './PhorumPostList.scss'
 
 export const PhorumPostList: FC<PhorumPostProps[]> = (
@@ -8,7 +8,7 @@ export const PhorumPostList: FC<PhorumPostProps[]> = (
   const list = Object.values(postList)
 
   return (
-    <ul className="post__list">
+    <ul className="post-list">
       {list.map((item, index) => (
         <PhorumPost
           userAvatar={item.userAvatar}

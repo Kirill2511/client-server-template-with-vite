@@ -42,7 +42,7 @@ const menuLinks: MenuItemProps[] = [
   },
   {
     text: 'Как играть',
-    link: '/howto',
+    link: '/rules',
   },
 ];
 

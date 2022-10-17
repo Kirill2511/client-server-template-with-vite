@@ -16,3 +16,13 @@ export const StaticLayout: FC<StaticLayoutProps> = ({ children }) => {
     </div>
   );
 };
+
+// export const StaticLayout: FC<StaticLayoutProps> = ({ children }) => {
+//   return (
+//     <div className="main__wrapper">
+//       <LeftPanel />
+//       <UpperMenu />
+//       {children}
+//     </div>
+//   );
+// };

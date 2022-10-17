@@ -1,0 +1,19 @@
+@import './../../../../styles/variables';
+
+.thread-list {
+  &__head {
+    display: grid;
+    grid-template-columns: 6fr 2fr 4fr;
+    background-color: $color-back-blue;
+    line-height: 30px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  &__thread,
+  &__replies {
+    &_header {
+      border-right: 1px solid white;
+    }
+  }
+}

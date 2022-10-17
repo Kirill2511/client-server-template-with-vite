@@ -1,5 +1,5 @@
 import React from 'react'
-import { PhorumThreadContent } from '../../../components/Phorum/PhorumThreadPage/PhorumThreadPageContent/PhorumThreadPageContent';
+import { PhorumThreadContent } from '../../../components/Phorum/PhorumThreadPage/__Content/PhorumThreadPageContent';
 //import { PhorumMainPageContent } from '../../../components/Phorum/PhorumMainPage/PhorumMainPageContent/PhorumMainPageContent';
 
 

@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 
 function goToPage(pageNo: number | string, pages: number) {
   const page = pageNo === '...' ? Math.floor(pages / 2) : pageNo
@@ -6,7 +6,7 @@ function goToPage(pageNo: number | string, pages: number) {
 }
 
 type PageCounterProps = {
-    pages: number,
+  pages: number
 }
 
 export const PageCounter: React.FC<PageCounterProps> = props => {
@@ -20,7 +20,7 @@ export const PageCounter: React.FC<PageCounterProps> = props => {
     <span>
       {pagesArray.map((page, index) => (
         <span
-          className="thread_pagecount"
+          className="pagecount"
           onClick={() => {
             goToPage(page, pages)
           }}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { PhorumMainPageContent } from '../../../components/Phorum/PhorumMainPage/PhorumMainPageContent/PhorumMainPageContent';
+import { PhorumMainPageContent } from '../../../components/Phorum/PhorumMainPage/__Content/PhorumMainPageContent';
 
 
 import { StaticLayout } from '../../../components/StaticLayout/StaticLayout';

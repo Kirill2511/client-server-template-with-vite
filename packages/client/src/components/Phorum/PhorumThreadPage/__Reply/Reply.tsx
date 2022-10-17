@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import { Button } from '../../../Button/Button'
 import { Input } from '../../../Input/Input'
 import './Reply.scss'
@@ -12,24 +12,21 @@ type ReplyProps = {
 export const Reply: FC<ReplyProps> = ({
   buttonContent = 'Отправить',
   InputPlaceholder = 'Ваш ответ...',
-  InputErrorText = 'HTML-теги запрещены!',
 }) => {
-  const [isError, setError] = useState(false)
   // TODO: поставить проверку на нал. сообщения и только тогда включать кнопку
   return (
     <div className="reply-wrapper">
-      <div className="placeholder"></div>
+      <div className="placeholder"></div>      
       <form className="reply">
-        <div className="reply__input">
+        <div className="reply__reply">
           <textarea
-            className="input__textarea"
+            className="reply__textarea"
             placeholder={InputPlaceholder}></textarea>
-          <div className="error-message">{isError && InputErrorText}</div>
         </div>
-        <div className="reply__button"> 
-          <Input type="file" className="reply__hidden_input" />
+        <div className="reply__button_area"> 
+          <Input type="file" className="reply__input_hidden" />
           <Button
-            className="reply__button_button"
+            className="reply__button"
             onClick={() => {
               //TODO: поставить проверку на наличие сообщения?
               console.log('ТУТ БУДЕТ ОТПРАВКА СООБЩЕНИЯ')
