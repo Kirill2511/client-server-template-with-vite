@@ -1,11 +1,13 @@
 import React, { FC, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Table, TableCell, TableRow } from '../../components/Table/Table';
 import { ProfileLayout } from '../../components/ProfileLayout/ProfileLayout';
 
 import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
-import { useNavigate } from 'react-router-dom';
+
+import './profileChangePasswordPage.scss';
 
 interface ProfileChangePasswordPageProps {
   profileData?: {

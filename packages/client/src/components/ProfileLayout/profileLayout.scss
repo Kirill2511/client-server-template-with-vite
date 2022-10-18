@@ -1,6 +1,7 @@
-.popup {
-  &__input {
-    display: none;
+.profile-page {
+
+  &__avatar {
+    margin-top: 60px;
   }
 
   &__label {
@@ -12,40 +13,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &_blue {
+      color: var(--color-links);
+      text-decoration: underline;
+    }
+
+    &_grey {
+      color: var(--color-midgray);
+      text-decoration: none;
+      width: 250px;
+    }
   }
 
-  &__label_blue {
-    color: var(--color-links);
-    text-decoration: underline;
-  }
-
-  &__label_grey {
-    color: var(--color-midgray);
-    text-decoration: none;
-    width: 250px;
-  }
-}
-
-.profile-page {
-  &__avatar {
-    margin-top: 60px;
-  }
-
-  &__button {
-    display: block;
-    margin: 60px auto 0;
-    width: 280px;
+  &__input_file {
+    display: none;
   }
 
   &__table {
     margin: 60px auto 0;
     max-width: 800px;
-  }
-
-  .profile-page__input {
-    text-align: right;
-    border: none;
-    margin: 0;
-    color: var(--color-midgray);
   }
 }

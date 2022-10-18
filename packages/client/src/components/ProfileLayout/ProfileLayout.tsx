@@ -29,21 +29,19 @@ export const ProfileLayout: FC<ProfileLayoutProps> = ({ children, firstName, ava
   }, []);
 
   useEffect(() => {
-    if (inputElem.current) {
-      inputElem.current.addEventListener('change', (event) => {
-        const file: File | null = ((event.currentTarget as HTMLInputElement).files as FileList)[0];
-        if (file) {
-          setTitle('Файл загружен');
-          setFile(file);
-          setLabelText(file?.name);
-          setShowValidation(false);
-        }
-      });
-    }
+    inputElem.current?.addEventListener('change', (event) => {
+      const file: File | null = ((event.currentTarget as HTMLInputElement).files as FileList)[0];
+      if (file) {
+        setTitle('Файл загружен');
+        setFile(file);
+        setLabelText(file?.name);
+        setShowValidation(false);
+      }
+    });
   }, [popupVisible]);
 
   const handleScreenClick = useCallback((event: BaseSyntheticEvent) => {
-    const withinBoundaries = (event.nativeEvent as Record<string, HTMLInputElement[]>).path.includes(popupElem.current);
+    const withinBoundaries = popupElem.current === event.target || popupElem.current.contains(event.target);
 
     if (!withinBoundaries) {
       setPopupVisible(false);
@@ -77,11 +75,13 @@ export const ProfileLayout: FC<ProfileLayoutProps> = ({ children, firstName, ava
             showValidation={showValidation}
             validationText="Нужно выбрать файл"
           >
-            <input ref={inputElem} type="file" id="popup__input" className="popup__input" />
             <label
-              htmlFor="popup__input"
-              className={classNames(file ? 'popup__label_grey' : 'popup__label_blue', 'popup__label')}
+              className={classNames(
+                file ? 'profile-page__label_grey' : 'profile-page__label_blue',
+                'profile-page__label',
+              )}
             >
+              <input ref={inputElem} type="file" className="profile-page__input_file" />
               {labelText}
             </label>
           </Popup>
