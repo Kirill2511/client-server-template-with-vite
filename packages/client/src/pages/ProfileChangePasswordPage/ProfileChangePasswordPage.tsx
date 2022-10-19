@@ -29,29 +29,29 @@ export const ProfileChangePasswordPage: FC<ProfileChangePasswordPageProps> = ({ 
   }, [navigate]);
 
   return (
-    <ProfileLayout avatarPath={profileData.avatarPath} navBackPath="/profile">
+    <ProfileLayout avatarPath={profileData.avatarPath} navBackPath="/profile" className="profile-change-password-page">
       <form onSubmit={handleButtonSubmit}>
-        <Table className="profile-page__table">
+        <Table className="profile-change-password-page__table">
           <TableRow>
             <TableCell> Старый пароль </TableCell>
             <TableCell>
-              <Input type="password" className="profile-page__input" />
+              <Input type="password" className="profile-change-password-page__input" />
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell> Новый пароль </TableCell>
             <TableCell>
-              <Input type="password" className="profile-page__input" />
+              <Input type="password" className="profile-change-password-page__input" />
             </TableCell>
           </TableRow>
           <TableRow>
             <TableCell> Повторите новый пароль </TableCell>
             <TableCell>
-              <Input type="password" className="profile-page__input" />
+              <Input type="password" className="profile-change-password-page__input" />
             </TableCell>
           </TableRow>
         </Table>
-        <Button className="profile-page__button" type="submit">
+        <Button className="profile-change-password-page__button" type="submit">
           Сохранить
         </Button>
       </form>

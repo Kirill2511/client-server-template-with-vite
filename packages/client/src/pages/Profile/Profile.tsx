@@ -4,6 +4,8 @@ import { Link } from '../../components/Link/Link';
 import { Table, TableCell, TableRow } from '../../components/Table/Table';
 import { ProfileLayout } from '../../components/ProfileLayout/ProfileLayout';
 
+import './profile.scss';
+
 interface ProfilePageProps {
   profileData?: {
     firstName: string;
@@ -31,7 +33,7 @@ export const Profile: FC<ProfilePageProps> = ({ profileData }) => {
   const { firstName, lastName, login, email, phone, displayName, avatarPath } = profileData;
 
   return (
-    <ProfileLayout firstName={firstName} avatarPath={avatarPath}>
+    <ProfileLayout firstName={firstName} avatarPath={avatarPath} className="profile-page">
       <Table className="profile-page__table">
         <TableRow>
           <TableCell> Почта </TableCell>

@@ -1,4 +1,4 @@
-.profile-page {
+.profile-layout {
 
   &__avatar {
     margin-top: 60px;
@@ -28,10 +28,5 @@
 
   &__input_file {
     display: none;
-  }
-
-  &__table {
-    margin: 60px auto 0;
-    max-width: 800px;
   }
 }

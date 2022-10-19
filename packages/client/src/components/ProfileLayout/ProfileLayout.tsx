@@ -12,9 +12,16 @@ interface ProfileLayoutProps extends PropsWithChildren {
   firstName?: string;
   avatarPath?: string;
   navBackPath?: string;
+  className?: string;
 }
 
-export const ProfileLayout: FC<ProfileLayoutProps> = ({ children, firstName, avatarPath, navBackPath = '/' }) => {
+export const ProfileLayout: FC<ProfileLayoutProps> = ({
+  children,
+  firstName,
+  avatarPath,
+  navBackPath = '/',
+  className,
+}) => {
   const [title, setTitle] = useState('Загрузите файл');
   const [labelText, setLabelText] = useState('Выбрать файл на компьютере');
   const [file, setFile] = useState<File | undefined>(undefined);
@@ -61,9 +68,14 @@ export const ProfileLayout: FC<ProfileLayoutProps> = ({ children, firstName, ava
   }, [file]);
 
   return (
-    <div className="profile-page">
+    <div className={classNames('profile-layout', className)}>
       <BackButton to={navBackPath} />
-      <AvatarLg avatarPath={avatarPath} onClick={handleAvatarClick} name={firstName} className="profile-page__avatar" />
+      <AvatarLg
+        avatarPath={avatarPath}
+        onClick={handleAvatarClick}
+        name={firstName}
+        className="profile-layout__avatar"
+      />
 
       {popupVisible && (
         <BackgroundBlur onClick={handleScreenClick}>
@@ -77,11 +89,11 @@ export const ProfileLayout: FC<ProfileLayoutProps> = ({ children, firstName, ava
           >
             <label
               className={classNames(
-                file ? 'profile-page__label_grey' : 'profile-page__label_blue',
-                'profile-page__label',
+                file ? 'profile-layout__label_grey' : 'profile-layout__label_blue',
+                'profile-layout__label',
               )}
             >
-              <input ref={inputElem} type="file" className="profile-page__input_file" />
+              <input ref={inputElem} type="file" className="profile-layout__input_file" />
               {labelText}
             </label>
           </Popup>
