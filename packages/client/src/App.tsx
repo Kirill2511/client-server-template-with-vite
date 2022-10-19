@@ -8,7 +8,7 @@ import './scss/index.scss';
 const Login = React.lazy(() => import('./pages/Login/Login'));
 const Register = React.lazy(() => import('./pages/Register/Register'));
 const Error = React.lazy(() => import('./pages/Error/Error'));
-const ProfilePage = React.lazy(() => import('./pages/Profile/Profile'));
+const ProfilePage = React.lazy(() => import('./pages/ProfilePage/ProfilePage'));
 const ProfileChangeInfoPage = React.lazy(() => import('./pages/ProfileChangeInfoPage/ProfileChangeInfoPage'));
 const ProfileChangePasswordPage = React.lazy(
   () => import('./pages/ProfileChangePasswordPage/ProfileChangePasswordPage'),

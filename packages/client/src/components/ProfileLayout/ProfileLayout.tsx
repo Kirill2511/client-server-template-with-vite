@@ -6,7 +6,7 @@ import { AvatarLg } from '../AvatarLg/AvatarLg';
 import { BackgroundBlur } from '../BackgroundBlur/BackgroundBlur';
 import { Popup } from '../Popup/Popup';
 
-import './profileLayout.scss';
+import './ProfileLayout.scss';
 
 interface ProfileLayoutProps extends PropsWithChildren {
   firstName?: string;

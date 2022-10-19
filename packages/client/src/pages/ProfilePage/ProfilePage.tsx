@@ -4,7 +4,7 @@ import { Link } from '../../components/Link/Link';
 import { Table, TableCell, TableRow } from '../../components/Table/Table';
 import { ProfileLayout } from '../../components/ProfileLayout/ProfileLayout';
 
-import './profile.scss';
+import './ProfilePage.scss';
 
 interface ProfilePageProps {
   profileData?: {
@@ -28,7 +28,7 @@ const data = {
   avatarPath: '',
 };
 
-export const Profile: FC<ProfilePageProps> = ({ profileData }) => {
+export const ProfilePage: FC<ProfilePageProps> = ({ profileData }) => {
   profileData = data; // TODO: брать из стора
   const { firstName, lastName, login, email, phone, displayName, avatarPath } = profileData;
 
@@ -87,4 +87,4 @@ export const Profile: FC<ProfilePageProps> = ({ profileData }) => {
   );
 };
 
-export default Profile;
+export default ProfilePage;

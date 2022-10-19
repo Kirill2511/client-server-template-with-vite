@@ -6,7 +6,7 @@ import { ProfileLayout } from '../../components/ProfileLayout/ProfileLayout';
 import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
 
-import './profileChangeInfoPage.scss';
+import './ProfileChangeInfoPage.scss';
 
 interface ProfilePageProps {
   profileData?: {

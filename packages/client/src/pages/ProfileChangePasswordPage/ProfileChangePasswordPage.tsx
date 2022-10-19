@@ -7,7 +7,7 @@ import { ProfileLayout } from '../../components/ProfileLayout/ProfileLayout';
 import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
 
-import './profileChangePasswordPage.scss';
+import './ProfileChangePasswordPage.scss';
 
 interface ProfileChangePasswordPageProps {
   profileData?: {
