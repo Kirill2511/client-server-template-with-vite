@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import './game.scss';
 import foto from '../../assets/avatar.svg';
 import { Tetris } from './game-screen';
-import { tetrominoSequence, playfield, tetrominos, colors } from './constant';
 export const Game: React.FC = () => {
   const [IsGameStarted, setIsGameStarted] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -21,17 +20,7 @@ export const Game: React.FC = () => {
   }, []);
   const startGame = () => {
     setIsGameStarted(true);
-    const w = new Tetris(
-      'canvas',
-      10,
-      20,
-      canvasRef,
-      canvasRef.current,
-      tetrominoSequence,
-      playfield,
-      tetrominos,
-      colors,
-    );
+    const w = new Tetris('canvas', 10, 20, canvasRef, canvasRef.current, canvasRefFigure, canvasRefFigure.current);
     w.init();
     w.onKeypress();
     function step() {
@@ -55,7 +44,7 @@ export const Game: React.FC = () => {
         <li>выйти</li>
       </div>
       <div className="game-screen">
-        <canvas ref={canvasRef} id="canvas" width={500} height={1000}></canvas>
+        <canvas ref={canvasRef} className="canvas" width={500} height={1000}></canvas>
         <div className="button-wrapper">
           <div className="button-wrapper-inner">
             {!IsGameStarted && (
@@ -68,7 +57,7 @@ export const Game: React.FC = () => {
       </div>
       <div className="game-info">
         <div className="next-figure">
-          <canvas ref={canvasRefFigure} id="canvas-figure"></canvas>
+          <canvas ref={canvasRefFigure} className="canvas-figure" width={250} height={250}></canvas>
         </div>
         <div className="score-game">
           <img className="avatar" src={foto} alt="" />

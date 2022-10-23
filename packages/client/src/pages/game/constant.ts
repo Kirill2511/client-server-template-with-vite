@@ -1,6 +1,5 @@
-export let tetrominoSequence: any[];
-export let playfield: any[];
-export const tetrominos = {
+export type sequence = 'I' | 'J' | 'L' | 'O' | 'S' | 'T' | 'Z';
+export const tetrominos: Record<sequence, number[][]> = {
   I: [
     [0, 0, 0, 0],
     [1, 1, 1, 1],
@@ -37,13 +36,15 @@ export const tetrominos = {
     [0, 0, 0],
   ],
 };
-export const colors = {
-  I: 'cyan',
-  O: 'yellow',
-  T: 'purple',
-  S: 'green',
-  Z: 'red',
-  J: 'blue',
-  L: 'orange',
+export type ColorsType = {
+  [key: string]: string;
 };
-export const sequence = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
+export enum Colors {
+  I = 'cyan',
+  O = 'yellow',
+  T = 'purple',
+  S = 'green',
+  Z = 'red',
+  J = 'blue',
+  L = 'orange',
+}

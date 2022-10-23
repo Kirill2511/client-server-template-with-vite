@@ -1,17 +1,25 @@
+import { Colors, ColorsType, sequence, tetrominos } from './constant';
+
 export class Tetris {
+  private myOnClick = this.MyClick.bind(this);
   public count = 0;
-  public tetromino = this.getNextTetromino();
+  public currentTetromino = this.getNextTetromino();
+  public nextTetromino = this.getNextTetromino();
   public gameOver = false;
+  public paused = false;
   public title: string;
   public width: number;
   public height: number;
   public canvasRef: React.RefObject<HTMLCanvasElement>;
+  public canvasRefFigure: React.RefObject<HTMLCanvasElement>;
   public canvas: HTMLCanvasElement | null;
+  public canvasFigure: HTMLCanvasElement | null;
   public ctx: CanvasRenderingContext2D | null | undefined;
-  public tetrominoSequence: Array<[]> | any[] | Array<string>;
-  public playfield: any[];
-  public tetrominos: any;
-  public colors: any;
+  public ctxFigure: CanvasRenderingContext2D | null | undefined;
+  private tetrominoSequence: string[] = [];
+  public playfield: any[] = [];
+  public tetrominos = tetrominos;
+  public colors: ColorsType = Colors;
   public sequence = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
   CELL_SIZE = 50;
 
@@ -21,29 +29,24 @@ export class Tetris {
     height: number,
     canvasRef: React.RefObject<HTMLCanvasElement>,
     canvas: HTMLCanvasElement | null,
-    tetrominoSequence: any[],
-    playfield: any[],
-    tetrominos: any,
-    colors: any,
+    canvasRefFigure: React.RefObject<HTMLCanvasElement>,
+    canvasFigure: HTMLCanvasElement | null,
   ) {
     this.canvas = canvas;
     this.canvasRef = canvasRef;
+    this.canvasFigure = canvasFigure;
+    this.canvasRefFigure = canvasRefFigure;
     this.title = title;
     this.width = width;
     this.height = height;
-    this.tetrominoSequence = tetrominoSequence;
-    this.playfield = playfield;
-    this.tetrominos = tetrominos;
-    this.colors = colors;
     this.createCanvas();
   }
 
   public createCanvas(): void {
-    if (this.canvas && this.canvasRef.current) {
+    if (this.canvas && this.canvasRef.current && this.canvasFigure && this.canvasRefFigure.current) {
       this.ctx = this.canvasRef.current.getContext('2d');
-      this.canvas.width = 500;
-      this.canvas.height = 1000;
-      if (this.ctx) {
+      this.ctxFigure = this.canvasRefFigure.current.getContext('2d');
+      if (this.ctx && this.ctxFigure) {
         this.ctx.fillStyle = '#B0E0E6';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
       }
@@ -88,6 +91,9 @@ export class Tetris {
       this.tetrominoSequence.push(name);
     }
   }
+  public get nextTetronimo() {
+    return this.nextTetromino;
+  }
   public getNextTetromino() {
     this.tetrominos = {
       I: [
@@ -127,15 +133,13 @@ export class Tetris {
       ],
     };
     this.tetrominoSequence = [];
-    if (this.tetrominoSequence.length === 0) {
-      this.generateSequence();
-    }
+    this.generateSequence();
     const name = this.tetrominoSequence.pop();
-    const matrix = this.tetrominos[name];
+    const matrix = this.tetrominos[(name || 'I') as sequence];
     const col = 5;
     const row = name === 'I' ? -1 : -2;
     return {
-      name: name,
+      name: name || 'I',
       matrix: matrix,
       row: row,
       col: col,
@@ -146,7 +150,7 @@ export class Tetris {
     const result = matrix.map((row, i) => row.map((val, j) => matrix[N - j][i]));
     return result;
   }
-  public isValidMove(matrix: Array<[]>, cellRow: number, cellCol: number) {
+  public isValidMove(matrix: number[][], cellRow: number, cellCol: number) {
     for (let row = 0; row < matrix.length; row++) {
       for (let col = 0; col < matrix[row].length; col++) {
         if (
@@ -163,13 +167,13 @@ export class Tetris {
     return true;
   }
   public placeTetromino() {
-    for (let row = 0; row < this.tetromino.matrix.length; row++) {
-      for (let col = 0; col < this.tetromino.matrix[row].length; col++) {
-        if (this.tetromino.matrix[row][col]) {
-          if (this.tetromino.row + row < 0) {
+    for (let row = 0; row < this.currentTetromino.matrix.length; row++) {
+      for (let col = 0; col < this.currentTetromino.matrix[row].length; col++) {
+        if (this.currentTetromino.matrix[row][col]) {
+          if (this.currentTetromino.row + row < 0) {
             return this.showGameOver();
           }
-          this.playfield[this.tetromino.row + row][this.tetromino.col + col] = this.tetromino.name;
+          this.playfield[this.currentTetromino.row + row][this.currentTetromino.col + col] = this.currentTetromino.name;
         }
       }
     }
@@ -184,10 +188,12 @@ export class Tetris {
         row--;
       }
     }
-    this.tetromino = this.getNextTetromino();
+    this.currentTetromino = this.nextTetromino;
+    this.nextTetromino = this.getNextTetromino();
   }
   public showGameOver() {
     this.gameOver = true;
+    document.removeEventListener('keydown', this.myOnClick);
     if (this.ctx && this.canvas) {
       this.ctx.fillStyle = 'black';
       this.ctx.globalAlpha = 0.75;
@@ -200,8 +206,22 @@ export class Tetris {
       this.ctx.fillText('Игра окончена', this.canvas.width / 2, this.canvas.height / 2);
     }
   }
+  public pause() {
+    this.paused = !this.paused;
+    if (this.paused && this.ctx && this.canvas && !this.gameOver) {
+      this.ctx.fillStyle = 'black';
+      this.ctx.globalAlpha = 0.75;
+      this.ctx.fillRect(0, this.canvas.height / 2 - 30, this.canvas.width, 60);
+      this.ctx.globalAlpha = 1;
+      this.ctx.fillStyle = 'white';
+      this.ctx.font = '36px monospace';
+      this.ctx.textAlign = 'center';
+      this.ctx.textBaseline = 'middle';
+      this.ctx.fillText('Пауза', this.canvas.width / 2, this.canvas.height / 2);
+    }
+  }
   public loop() {
-    if (!this.gameOver && this.ctx && this.canvas) {
+    if (!this.gameOver && !this.paused && this.ctx && this.canvas) {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
       this.drawWorld();
       for (let row = 0; row < 20; row++) {
@@ -213,22 +233,41 @@ export class Tetris {
           }
         }
       }
-      if (this.tetromino && this.ctx) {
+      if (this.nextTetromino && this.ctxFigure && this.canvasFigure) {
+        this.ctxFigure.clearRect(0, 0, this.canvasFigure.width, this.canvasFigure.height);
+        for (let i = 0; i < this.nextTetromino.matrix.length; i++) {
+          for (let j = 0; j < this.nextTetromino.matrix[i].length; j++) {
+            if (this.nextTetromino.matrix[i][j] === 1) {
+              let margin = 1;
+              if (this.nextTetromino.name === 'I') margin = 0.5;
+              else if (this.nextTetromino.name === 'O') margin = 1.5;
+              this.ctxFigure.fillStyle = this.colors[this.nextTetromino.name];
+              this.ctxFigure.fillRect(
+                (j + margin) * this.CELL_SIZE,
+                (i + margin) * this.CELL_SIZE,
+                this.CELL_SIZE - 1,
+                this.CELL_SIZE - 1,
+              );
+            }
+          }
+        }
+      }
+      if (this.currentTetromino && this.ctx) {
         if (++this.count > 35) {
-          this.tetromino.row++;
+          this.currentTetromino.row++;
           this.count = 0;
-          if (!this.isValidMove(this.tetromino.matrix, this.tetromino.row, this.tetromino.col)) {
-            this.tetromino.row--;
+          if (!this.isValidMove(this.currentTetromino.matrix, this.currentTetromino.row, this.currentTetromino.col)) {
+            this.currentTetromino.row--;
             this.placeTetromino();
           }
         }
-        this.ctx.fillStyle = this.colors[this.tetromino.name];
-        for (let row = 0; row < this.tetromino.matrix.length; row++) {
-          for (let col = 0; col < this.tetromino.matrix[row].length; col++) {
-            if (this.tetromino.matrix[row][col]) {
+        this.ctx.fillStyle = this.colors[this.currentTetromino.name];
+        for (let row = 0; row < this.currentTetromino.matrix.length; row++) {
+          for (let col = 0; col < this.currentTetromino.matrix[row].length; col++) {
+            if (this.currentTetromino.matrix[row][col]) {
               this.ctx.fillRect(
-                (this.tetromino.col + col) * this.CELL_SIZE,
-                (this.tetromino.row + row) * this.CELL_SIZE,
+                (this.currentTetromino.col + col) * this.CELL_SIZE,
+                (this.currentTetromino.row + row) * this.CELL_SIZE,
                 this.CELL_SIZE - 1,
                 this.CELL_SIZE - 1,
               );
@@ -238,48 +277,53 @@ export class Tetris {
       }
     }
   }
-  public onKeypress() {
-    document.addEventListener(
-      'keydown',
-      function (this: any, e: any) {
-        switch (e.keyCode) {
-          case 38: {
-            const matrix = this.rotate(this.tetromino.matrix);
-            if (this.isValidMove(matrix, this.tetromino.row, this.tetromino.col)) {
-              this.tetromino.matrix = matrix;
-            }
-            break;
-          }
-          case 40: {
-            const row = this.tetromino.row + 1;
-            if (!this.isValidMove(this.tetromino.matrix, row, this.tetromino.col)) {
-              this.tetromino.row = row - 1;
-              this.placeTetromino();
-              return;
-            }
-            this.tetromino.row = row;
-            break;
-          }
-          case 37: {
-            const col = this.tetromino.col - 1;
-            if (this.isValidMove(this.tetromino.matrix, this.tetromino.row, col)) {
-              this.tetromino.col = col;
-            }
-            break;
-          }
-          case 39: {
-            const col = this.tetromino.col + 1;
-            if (this.isValidMove(this.tetromino.matrix, this.tetromino.row, col)) {
-              this.tetromino.col = col;
-            }
-            break;
-          }
-          case 90:
-            console.log('пауза');
-            console.log('Z');
-            break;
+  private MyClick(this: any, e: any) {
+    switch (e.keyCode) {
+      case 38: {
+        const matrix = this.rotate(this.currentTetromino.matrix);
+        if (this.isValidMove(matrix, this.currentTetromino.row, this.currentTetromino.col)) {
+          this.currentTetromino.matrix = matrix;
         }
-      }.bind(this),
-    );
+        break;
+      }
+      case 40: {
+        const row = this.currentTetromino.row + 1;
+        if (!this.isValidMove(this.currentTetromino.matrix, row, this.currentTetromino.col)) {
+          this.currentTetromino.row = row - 1;
+          this.placeTetromino();
+          return;
+        }
+        this.currentTetromino.row = row;
+        break;
+      }
+      case 37: {
+        const col = this.currentTetromino.col - 1;
+        if (this.isValidMove(this.currentTetromino.matrix, this.currentTetromino.row, col)) {
+          this.currentTetromino.col = col;
+        }
+        break;
+      }
+      case 39: {
+        const col = this.currentTetromino.col + 1;
+        if (this.isValidMove(this.currentTetromino.matrix, this.currentTetromino.row, col)) {
+          this.currentTetromino.col = col;
+        }
+        break;
+      }
+      case 13: {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+        } else if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+        break;
+      }
+      case 90:
+        this.pause();
+        break;
+    }
+  }
+  public onKeypress() {
+    document.addEventListener('keydown', this.myOnClick);
   }
 }

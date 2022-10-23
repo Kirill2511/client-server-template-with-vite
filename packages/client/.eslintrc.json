@@ -26,6 +26,8 @@
   "rules": {
     "quotes": ["error", "single"],
     "prettier/prettier": ["error", { "singleQuote": true }],
-    "require-jsdoc": "off"
+    "require-jsdoc": "off",
+    "no-unused-vars": "off",
+  "@typescript-eslint/no-unused-vars": "error"
   }
 }
