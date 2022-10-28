@@ -16,4 +16,16 @@
     margin: 60px auto 0;
     max-width: 800px;
   }
+
+  &__error-message {
+    margin: 10px auto;
+    max-width: 400px;
+    text-align: center;
+    color: var(--color-danger);
+  }
+
+  &__button_disabled {
+    background-color: var(--color-danger);
+    cursor: default;
+  }
 }
