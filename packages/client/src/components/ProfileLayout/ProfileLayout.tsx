@@ -12,14 +12,13 @@ import { filePrefix } from '../../consts/prefix';
 import './ProfileLayout.scss';
 
 interface ProfileLayoutProps extends PropsWithChildren {
-  firstName?: string;
   navBackPath?: string;
   className?: string;
 }
 
-export const ProfileLayout: FC<ProfileLayoutProps> = ({ children, firstName, navBackPath = '/', className }) => {
+export const ProfileLayout: FC<ProfileLayoutProps> = ({ children, navBackPath = '/', className }) => {
   const dispatch = useAppDispatch();
-  const { avatar } = useAppSelector((state) => state.auth.user);
+  const { avatar, display_name: displayName, first_name: firstName } = useAppSelector((state) => state.auth.user);
   const avatarPath = filePrefix + avatar;
 
   const [title, setTitle] = useState('Загрузите файл');
@@ -90,7 +89,7 @@ export const ProfileLayout: FC<ProfileLayoutProps> = ({ children, firstName, nav
       <AvatarLg
         avatarPath={avatar ? avatarPath : ''}
         onClick={handleAvatarClick}
-        name={firstName}
+        name={displayName ? displayName : firstName}
         className="profile-layout__avatar"
       />
 
@@ -117,7 +116,6 @@ export const ProfileLayout: FC<ProfileLayoutProps> = ({ children, firstName, nav
           </Popup>
         </BackgroundBlur>
       )}
-
       {children}
     </div>
   );

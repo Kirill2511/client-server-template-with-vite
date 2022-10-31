@@ -8,7 +8,7 @@
 
   &__button {
     display: block;
-    margin: 60px auto 0;
+    margin: 20px auto 0;
     width: 280px;
   }
 
@@ -22,6 +22,7 @@
     max-width: 400px;
     text-align: center;
     color: var(--color-danger);
+    height: 20px;
   }
 
   &__button_disabled {

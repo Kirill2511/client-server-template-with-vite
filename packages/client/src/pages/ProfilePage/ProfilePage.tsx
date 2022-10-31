@@ -13,11 +13,14 @@ export const ProfilePage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { user } = useAppSelector((state) => state.auth);
-  const { login, email, phone } = user;
-  const firstName = user?.first_name;
-  const lastName = user?.second_name;
-  const displayName = user?.display_name;
+  const {
+    login,
+    email,
+    phone,
+    first_name: firstName,
+    second_name: lastName,
+    display_name: displayName,
+  } = useAppSelector((state) => state.auth.user);
 
   const onLogout = async () => {
     const res = await dispatch(logout());
@@ -27,7 +30,7 @@ export const ProfilePage = () => {
   };
 
   return (
-    <ProfileLayout firstName={firstName} className="profile-page">
+    <ProfileLayout className="profile-page">
       <Table className="profile-page__table">
         <TableRow>
           <TableCell> Почта </TableCell>

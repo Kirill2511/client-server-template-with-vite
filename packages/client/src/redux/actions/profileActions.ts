@@ -1,20 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { setAvatarRequest, setProfileInfoRequest, setProfilePasswordRequest } from '../../utils/api';
-
-interface IChangeInfo {
-  email: string;
-  login: string;
-  first_name: string;
-  second_name: string;
-  phone: string;
-  display_name: string;
-}
-
-interface IChangePassword {
-  oldPassword: string;
-  newPassword: string;
-}
+import {
+  IChangeInfo,
+  IChangePassword,
+  setAvatarRequest,
+  setProfileInfoRequest,
+  setProfilePasswordRequest,
+} from '../../utils/api';
 
 export const setAvatar = createAsyncThunk('auth/user/avatar', async (data: FormData, thunkAPI) => {
   try {

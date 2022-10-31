@@ -55,61 +55,69 @@ export const ProfileChangePasswordPage = () => {
       <form onSubmit={handleButtonSubmit}>
         <Table className="profile-change-password-page__table">
           <TableRow>
-            <TableCell> Старый пароль </TableCell>
-            <TableCell>
-              <Input
-                value={oldPassword}
-                type="password"
-                className="profile-change-password-page__input"
-                onChange={(e) => setOldPassword(e.target.value)}
-                onBlur={() => {
-                  setErrorOldPassword(
-                    validation(oldPassword, [passwordRule, requiredRule]).errorMessages.join('\n') ?? '',
-                  );
-                }}
-                errorText={errorOldPassword}
-              />
-            </TableCell>
+            <label className="profile-change-password-page__label">
+              <TableCell> Старый пароль </TableCell>
+              <TableCell>
+                <Input
+                  value={oldPassword}
+                  type="password"
+                  className="profile-change-password-page__input"
+                  onChange={(e) => setOldPassword(e.target.value)}
+                  onBlur={() => {
+                    setErrorOldPassword(
+                      validation(oldPassword, [passwordRule, requiredRule]).errorMessages.join('\n') ?? '',
+                    );
+                  }}
+                  errorText={errorOldPassword}
+                />
+              </TableCell>
+            </label>
           </TableRow>
           <TableRow>
-            <TableCell> Новый пароль </TableCell>
-            <TableCell>
-              <Input
-                value={newPassword}
-                type="password"
-                className="profile-change-password-page__input"
-                onChange={(e) => setNewPassword(e.target.value)}
-                onBlur={() => {
-                  setErrorNewPassword(
-                    validation(newPassword, [passwordRule, requiredRule]).errorMessages.join('-') ?? '',
-                  );
-                }}
-                errorText={errorNewPassword}
-              />
-            </TableCell>
+            <label className="profile-change-password-page__label">
+              <TableCell> Новый пароль </TableCell>
+              <TableCell>
+                <Input
+                  value={newPassword}
+                  type="password"
+                  className="profile-change-password-page__input"
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  onBlur={() => {
+                    setErrorNewPassword(
+                      validation(newPassword, [passwordRule, requiredRule]).errorMessages.join('-') ?? '',
+                    );
+                  }}
+                  errorText={errorNewPassword}
+                />
+              </TableCell>
+            </label>
           </TableRow>
           <TableRow>
-            <TableCell> Повторите новый пароль </TableCell>
-            <TableCell>
-              <Input
-                value={repeatPassword}
-                type="password"
-                className="profile-change-password-page__input"
-                onChange={(e) => setRepeatPassword(e.target.value)}
-                onBlur={() => {
-                  setPasswordsCompareError(
-                    validation(repeatPassword, [
-                      requiredRule,
-                      comparePasswordsRules(newPassword, repeatPassword),
-                    ]).errorMessages.join('\n') ?? '',
-                  );
-                }}
-                errorText={passwordsCompareError}
-              />
-            </TableCell>
+            <label className="profile-change-password-page__label">
+              <TableCell> Повторите новый пароль </TableCell>
+              <TableCell>
+                <Input
+                  value={repeatPassword}
+                  type="password"
+                  className="profile-change-password-page__input"
+                  onChange={(e) => setRepeatPassword(e.target.value)}
+                  onBlur={() => {
+                    setPasswordsCompareError(
+                      validation(repeatPassword, [
+                        requiredRule,
+                        comparePasswordsRules(newPassword, repeatPassword),
+                      ]).errorMessages.join('\n') ?? '',
+                    );
+                  }}
+                  errorText={passwordsCompareError}
+                />
+              </TableCell>
+            </label>
           </TableRow>
         </Table>
-        {errorMessage && <p className="profile-change-password-page__error-message">Не удалось сохранить изменения</p>}
+        <p className="profile-change-password-page__error-message">
+          {errorMessage && 'Не удалось сохранить изменения'}
+        </p>
         <Button
           className={classNames('profile-change-password-page__button', {
             'profile-change-password-page__button_disabled': isInvalid,

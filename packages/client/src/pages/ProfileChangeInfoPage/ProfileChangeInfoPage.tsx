@@ -12,15 +12,6 @@ import { loginRule, requiredRule, validation } from '../../helpers/validator';
 
 import './ProfileChangeInfoPage.scss';
 
-interface IChangeInfo {
-  email: string;
-  login: string;
-  first_name: string;
-  second_name: string;
-  phone: string;
-  display_name: string;
-}
-
 export const ProfileChangeInfoPage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -57,7 +48,7 @@ export const ProfileChangeInfoPage = () => {
       };
 
       (async () => {
-        const res = await dispatch(setProfileInfo(reqBody as IChangeInfo));
+        const res = await dispatch(setProfileInfo(reqBody));
         if (res.meta.requestStatus === 'fulfilled') {
           navigate('/profile');
         } else {
@@ -154,7 +145,7 @@ export const ProfileChangeInfoPage = () => {
             </TableCell>
           </TableRow>
         </Table>
-        {errorMessage && <p className="profile-change-info-page__error-message">Не удалось сохранить изменения</p>}
+        <p className="profile-change-info-page__error-message">{errorMessage && 'Не удалось сохранить изменения'}</p>
         <Button
           type="submit"
           className={classNames('profile-change-info-page__button', {

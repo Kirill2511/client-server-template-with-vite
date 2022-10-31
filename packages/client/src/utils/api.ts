@@ -8,7 +8,7 @@ const headers = {
   put: { 'Content-Type': 'application/json' },
 };
 
-interface IChangeInfo {
+export interface IChangeInfo {
   email: string;
   login: string;
   first_name: string;
@@ -16,7 +16,7 @@ interface IChangeInfo {
   phone: string;
   display_name: string;
 }
-interface IChangePasword {
+export interface IChangePassword {
   oldPassword: string;
   newPassword: string;
 }
@@ -67,7 +67,7 @@ export const setProfileInfoRequest = async (data: IChangeInfo) =>
     body: JSON.stringify(data),
   });
 
-export const setProfilePasswordRequest = async (data: IChangePasword) =>
+export const setProfilePasswordRequest = async (data: IChangePassword) =>
   await fetch(APIurls.CHANGEPASS, {
     method: 'PUT',
     headers: headers.put,
