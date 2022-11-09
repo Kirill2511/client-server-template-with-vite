@@ -1,5 +1,6 @@
-export type sequence = 'I' | 'J' | 'L' | 'O' | 'S' | 'T' | 'Z';
-export const tetrominos: Record<sequence, number[][]> = {
+export type Sequence = 'I' | 'J' | 'L' | 'O' | 'S' | 'T' | 'Z';
+export type TetrominoMatrix = (0 | 1)[][];
+export const tetrominos: Record<Sequence, TetrominoMatrix> = {
   I: [
     [0, 0, 0, 0],
     [1, 1, 1, 1],
@@ -36,15 +37,15 @@ export const tetrominos: Record<sequence, number[][]> = {
     [0, 0, 0],
   ],
 };
-export type ColorsType = {
-  [key: string]: string;
+export const colors: Record<Sequence, string> = {
+  I: '#FFDD00',
+  O: '#0DCAF0',
+  T: '#EE82EE',
+  S: '#FF0000',
+  Z: '#FFA500',
+  J: '#0000FF',
+  L: '#008000',
 };
-export enum Colors {
-  I = 'cyan',
-  O = 'yellow',
-  T = 'purple',
-  S = 'green',
-  Z = 'red',
-  J = 'blue',
-  L = 'orange',
-}
+
+export const gray = '#D9D9D9';
+export const sequence = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];

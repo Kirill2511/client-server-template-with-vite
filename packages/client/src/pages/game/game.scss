@@ -1,59 +1,169 @@
+@import url('https://fonts.googleapis.com/css?family=Just+Another+Hand&display=swap');
 #GAME {
   width: 600px;
   height: 600px;
   border: 1px solid #ebeeee;
 }
-.game-container {
+.game {
   display: flex;
-  justify-content: space-around;
-  padding: 1rem 2rem;
-  height: 100vh;
+  width: 100%;
+  max-width: 1280px;
+  justify-content: space-evenly;
+  padding: 2rem 2rem;
+  height: 100%;
+  max-height: 720px;
 }
-.menu-game {
-  width: 25%;
+.menu-item {
+  font-size: 35px;
+  text-align: left;
+  color: black;
+  position: relative;
+}
+.menu-item:hover {
+  text-shadow: 2px 4px 0px rgba(20, 20, 200, 0.5);
+}
+.menu-item:hover:before {
+  content: '';
+  position: absolute;
+  left: -50px;
+  top: 5px;
+  height: 40px;
+  width: 50px;
+  background-color: red;
+  clip-path: polygon(0% 0%, 100% 50%, 0% 100%, 10% 50%);
+
+  animation-name: finger;
+  animation-duration: 0.35s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+}
+@keyframes finger {
+  0% {
+    left: -55px;
+  }
+  100% {
+    left: -75px;
+  }
+}
+
+.game-menu {
+  font-family: 'Just Another Hand', cursive;
+  text-transform: uppercase;
+  padding: 2rem 0.5rem;
   height: fit-content;
   border-radius: 10px;
-  box-shadow: 0px 0px 13px 1px rgba(106, 139, 165, 0.58);
-  padding: 0rem 1rem;
+  box-shadow: 0px 0px 13px 1px rgb(106 139 165 / 58%);
+  grid-column-start: 2;
+  grid-row-start: 2;
+  justify-self: center;
+  text-decoration: none;
+  cursor: pointer;
+
+  &__header {
+    width: 100%;
+    text-align: center;
+    color: blue;
+    cursor: context-menu;
+    text-decoration: underline;
+  }
+  &__link {
+    color: var(--color-messages);
+    text-decoration: none;
+    cursor: pointer;
+
+    &_color-red {
+      color: red;
+    }
+  }
 }
-.game-score {
-  width: 25%;
-  border-radius: 10px;
-  box-shadow: 0px 0px 13px 1px rgba(106, 139, 165, 0.58);
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+
+  &__next-figure {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 13px 1px rgba(106, 139, 165, 0.58);
+  }
+
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+
+  &__user-name {
+    text-decoration: none;
+    line-height: 50px;
+    cursor: pointer;
+  }
+
+  &__score {
+    padding-top: 20px;
+  }
+
+  &__canvas-figure {
+    padding-top: 15%;
+  }
 }
-.next-figure {
-  width: 100%;
-  height: 50%;
-  border-radius: 10px;
-  box-shadow: 0px 0px 13px 1px rgba(106, 139, 165, 0.58);
-}
+
 .game-screen {
+  width: 300px;
+  height: 550px;
   display: flex;
   justify-content: center;
+
+  &__canvas {
+    height: 100%;
+    position: relative;
+  }
+
+  &__start-button {
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color-links);
+    color: var(--white);
+    position: absolute;
+    top: 300px;
+  }
+
+  &__game-end {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 233px;
+    height: 178px;
+    border-radius: 10px;
+    background-color: var(--white);
+    position: absolute;
+    top: 250px;
+    padding: 10px;
+    box-shadow: 0 0 6px 0 rgba(106, 139, 165, 0.58);
+  }
+
+  &__end-button {
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color-links);
+    color: var(--white);
+  }
 }
-.button-wrapper {
-  position: absolute;
-  display: table;
-  text-align: center;
-  height: 90%;
-}
-.button-wrapper-inner {
-  vertical-align: middle;
-  display: table-cell;
-}
-.start-btn {
-  cursor: pointer;
-}
-.canvas {
-  height: 100%;
-  position: relative;
-}
-.canvas-figure {
-  height: 100%;
-  position: relative;
-  border-radius: 10px;
-  box-shadow: 0px 0px 13px 1px rgba(106, 139, 165, 0.58);
-}
+
 .game-over {
   background: white;
   height: 10rem;
@@ -65,9 +175,4 @@
 }
 .show {
   display: table-caption;
-}
-.avatar {
-  width: 45%;
-  border-radius: 110px;
-  margin: 5% 27% 0% 28%;
 }
