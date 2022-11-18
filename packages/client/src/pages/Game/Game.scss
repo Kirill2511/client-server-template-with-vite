@@ -32,7 +32,6 @@
   &__submenu {
     list-style: none;
     padding: 0;
-
   }
 
   &__link {
@@ -110,7 +109,6 @@
     color: var(--white);
     position: absolute;
     top: 300px;
-
   }
 
   &__game-end {
@@ -153,7 +151,6 @@
   }
 }
 
-
 .game-over {
   background: white;
   height: 10rem;
@@ -166,4 +163,3 @@
 .show {
   display: table-caption;
 }
-

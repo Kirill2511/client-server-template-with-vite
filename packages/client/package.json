@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "dev": "node server",
+    "build:client": "vite build --outDir=dist/client --ssrManifest",
+    "build:ssr": "vite build --outDir=dist/ssr --ssr src/entry-server.tsx",
+    "build": "npm run build:client && npm run build:ssr",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -12,6 +14,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
+    "@rollup/plugin-replace": "^5.0.1",
     "classnames": "^2.3.2",
     "dotenv": "^16.0.3",
     "eslint-config-prettier": "^8.5.0",
