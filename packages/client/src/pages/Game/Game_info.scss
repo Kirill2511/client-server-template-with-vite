@@ -5,7 +5,7 @@
   flex-direction: column;
   width: 200px;
 
-  @media (max-width: 800px) {
+  @media (max-width: $mobile-screen-max-width) {
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
@@ -36,9 +36,9 @@
     align-items: center;
 
     @media (max-width: $mobile-screen-max-width) {
+      flex-direction: row;
       margin-left: 10px;
       width: 200px;
-      display: block;
     }
   }
 
@@ -60,8 +60,13 @@
     cursor: pointer;
     margin-top: 10px;
     @media (max-width: $mobile-screen-max-width) {
-      display: inline-block;
-      margin: 20px 0 0 10px;
+      display: block;
+      max-width: 140px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0 0 0 10px;
+      padding: 15px 2px;
     }
 
     &_theme_shark {
