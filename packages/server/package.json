@@ -19,7 +19,8 @@
     "pg": "^8.8.0",
     "prettier": "^2.7.1",
     "sequelize": "^6.25.6",
-    "sequelize-typescript": "^2.1.5"
+    "sequelize-typescript": "^2.1.5",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

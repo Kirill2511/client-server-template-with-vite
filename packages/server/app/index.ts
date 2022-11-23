@@ -1,5 +1,6 @@
 import { dbConnect, User } from './config/db.config'
 import type { IUser } from './models/user'
+import 'reflect-metadata'
 
 // Создание пользователя
 export async function createUser(firstName: string, lastName: string) {
