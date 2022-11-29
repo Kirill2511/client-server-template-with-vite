@@ -9,11 +9,11 @@ import bodyParser from 'body-parser'
 import userRouter from './routes/userRoutes'
 import themeRouter from './routes/themeRoutes'
 import forumRouter from './routes/forumRoutes'
-
-dotenv.config()
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { render } from '../client/dist/ssr/entry-server.cjs'
+
+dotenv.config()
 
 dotenv.config()
 
@@ -23,13 +23,13 @@ const port = Number(process.env.SERVER_PORT) || 3001
 
 app.use(bodyParser.json())
 
-app.use('/api/user', userRouter);
-app.use('/api/theme', themeRouter);
-app.use('/api/forum', forumRouter);
+app.use('/api/user', userRouter)
+app.use('/api/theme', themeRouter)
+app.use('/api/forum', forumRouter)
 
 startApp()
 
-app.get('/ssr-example', (_, res) => {
+app.get('/', (_, res) => {
   const result = render()
   const template = path.resolve(__dirname, '../client/dist/client/index.html')
   const htmlString = fs.readFileSync(template, 'utf-8')
@@ -38,10 +38,6 @@ app.get('/ssr-example', (_, res) => {
 })
 
 app.use(express.static(path.resolve(__dirname, '../client/dist/client')))
-
-app.get('/', (_, res) => {
-  res.json('👋 Howdy from the server :) ')
-})
 
 app.listen(port, () => {
   console.log(`  ➜ 🎸 Server is listening on port: ${port}`)
