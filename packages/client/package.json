@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node server",
-    "build:client": "vite build --outDir=dist/client --ssrManifest",
+    "dev": "vite",
+    "build:client": "vite build --outDir=dist/client",
     "build:ssr": "vite build --outDir=dist/ssr --ssr src/entry-server.tsx",
     "build": "npm run build:client && npm run build:ssr",
     "preview": "vite preview",

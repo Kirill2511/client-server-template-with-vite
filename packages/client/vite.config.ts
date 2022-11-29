@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { VitePWA } from 'vite-plugin-pwa';
 import rollupReplace from '@rollup/plugin-replace';
 import * as path from 'path';
+
 dotenv.config();
 
 // https://vitejs.dev/config/
@@ -13,6 +14,10 @@ export default defineConfig({
   },
   define: {
     __SERVER_PORT__: process.env.SERVER_PORT,
+  },
+  ssr: {
+    target: 'node',
+    format: 'cjs',
   },
   plugins: [
     rollupReplace({
