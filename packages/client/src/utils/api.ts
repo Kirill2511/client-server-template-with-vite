@@ -82,13 +82,14 @@ export const getProfileRequest = async () =>
 export const getServiceId = async (url: string) =>
   await fetch(`${APIurls.SERVICEID}?redirect_uri=${url}`, {
     method: 'GET',
-    headers: { ...headers.get },
+    headers: headers.get,
   });
 
 export const oAuthLogin = async (data: OAuthLoginData) =>
   await fetch(APIurls.OAUTHLOGIN, {
     method: 'POST',
-    headers: { ...headers.post },
+    headers: headers.post,
+    credentials: 'include',
     body: JSON.stringify(data),
   });
 
