@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import './Login.scss';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/hooks';
 import { login } from '../../redux/actions/singActions';
 import { Button } from '../../components/Button/Button';
@@ -11,6 +11,7 @@ import { loginRule, passwordRule, validation } from '../../helpers/validator';
 import classNames from 'classnames';
 import { getServiceId } from '../../utils/api';
 import { REDIRECT_URI } from '../../utils/constants';
+import { Link } from '../../components/Link/Link';
 
 export type LoginForm = {
   login: string;
@@ -94,11 +95,11 @@ const Login = () => {
             <Button className="login__button" onClick={onYandexClick}>
               Войти через Яндекс
             </Button>
+            <Link to="/register">
+              <Button backgroundOpacity={true}>Нет аккаунта?</Button>
+            </Link>
           </div>
         </form>
-        <Link to="/register">
-          <Button backgroundOpacity={true}>Нет аккаунта?</Button>
-        </Link>
       </div>
     </div>
   );
