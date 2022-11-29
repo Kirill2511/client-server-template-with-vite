@@ -9,6 +9,8 @@ import { Button } from '../../components/Button/Button';
 import { Input } from '../../components/Input/Input';
 import { loginRule, passwordRule, validation } from '../../helpers/validator';
 import classNames from 'classnames';
+import { getServiceId } from '../../utils/api';
+import { REDIRECT_URI } from '../../utils/constants';
 
 export type LoginForm = {
   login: string;
@@ -49,6 +51,15 @@ const Login = () => {
     setErrorPassword(validation(e.target.value, [passwordRule]).errorMessages[0] ?? '');
   };
 
+  const onYandexClick = async () => {
+    const res = await getServiceId(REDIRECT_URI);
+    const id = await res.json();
+    window.open(
+      `https://oauth.yandex.ru/authorize?response_type=code&client_id=${id.service_id}&redirect_uri=${REDIRECT_URI}`,
+      '_self',
+    );
+  };
+
   const checkError = errorLogin ? true : !!errorPassword;
 
   return (
@@ -79,6 +90,9 @@ const Login = () => {
               disabled={checkError}
             >
               Авторизоваться
+            </Button>
+            <Button className="login__button" onClick={onYandexClick}>
+              Войти через Яндекс
             </Button>
           </div>
         </form>

@@ -6,6 +6,8 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import { useAppDispatch } from './redux/hooks';
 import { checkLogin } from './redux/actions/singActions';
 import { Spinner } from './components/Spinner/Spinner';
+import { oAuthLogin } from './utils/api';
+import { REDIRECT_URI } from './utils/constants';
 
 const Login = React.lazy(() => import('./pages/Login/Login'));
 const Register = React.lazy(() => import('./pages/Register/Register'));
@@ -27,6 +29,11 @@ function App() {
 
   useEffect(() => {
     (async () => {
+      const code = new URLSearchParams(window.location.search).get('code');
+      if (code) {
+        await oAuthLogin({ code, redirect_uri: REDIRECT_URI });
+        window.history.replaceState({}, document.title, '/');
+      }
       await dispatch(checkLogin());
       setIsLoaded(true);
     })();
