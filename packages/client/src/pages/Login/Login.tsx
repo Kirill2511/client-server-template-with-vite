@@ -52,7 +52,8 @@ const Login = () => {
     setErrorPassword(validation(e.target.value, [passwordRule]).errorMessages[0] ?? '');
   };
 
-  const onYandexClick = async () => {
+  const onYandexClick = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const res = await getServiceId(REDIRECT_URI);
     const id = await res.json();
     window.open(
@@ -92,9 +93,7 @@ const Login = () => {
             >
               Авторизоваться
             </Button>
-            <Button className="login__button" onClick={onYandexClick}>
-              Войти через Яндекс
-            </Button>
+            <Button onClick={onYandexClick}>Войти через Яндекс</Button>
             <Link to="/register">
               <Button backgroundOpacity={true}>Нет аккаунта?</Button>
             </Link>
