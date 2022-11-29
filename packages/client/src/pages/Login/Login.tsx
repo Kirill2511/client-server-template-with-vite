@@ -52,7 +52,7 @@ const Login = () => {
     setErrorPassword(validation(e.target.value, [passwordRule]).errorMessages[0] ?? '');
   };
 
-  const onYandexClick = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onYandexClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     const res = await getServiceId(REDIRECT_URI);
     const id = await res.json();
