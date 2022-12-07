@@ -20,7 +20,7 @@ interface IThemeSlice {
 
 const themeInitState: IThemeSlice = {
   global: 'light',
-  active: 'classic',
+  active: 'newYear',
   soundOn: true,
   musicOn: true,
   soundLevel: '0.5',

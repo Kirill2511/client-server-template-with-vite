@@ -29,6 +29,7 @@ import {
   lightThemeBackground,
 } from './classic/classic-theme';
 import { man, shark, sharkBackground, sharkMusic, sharkSounds, sharkStroke } from './shark/shark-theme';
+import { Santa, NYsharkBackground, NYsharkMusic, NYsharkSounds, NYsharkStroke } from './newYear/new-year';
 
 export type StringObject = Record<string, string>;
 
@@ -63,6 +64,17 @@ export const themes: Record<string, ThemeProps> = {
     backgroundImg: sharkBackground, // картинка на фон
     themeStroke: sharkStroke,
   },
+  newYear: {
+    // обозначение темы
+    sounds: NYsharkSounds, // звуки в формате ThemeSounds
+    music: NYsharkMusic, // музыкальная запись 1 штука
+    images: {
+      // картинки для анимации
+      santa: Santa,
+    },
+    backgroundImg: NYsharkBackground, // картинка на фон
+    themeStroke: NYsharkStroke,
+  },
   classic: {
     sounds: classicSounds,
     music: classicMusic,
@@ -81,25 +93,28 @@ export const themes: Record<string, ThemeProps> = {
   },
 };
 
-export type ThemesNames = 'classic' | 'shark' | 'dark';
+export type ThemesNames = 'classic' | 'shark' | 'dark' | 'newYear';
 
 export const themesOptions: Record<string, ThemesNames> = {
   // Обозначение в селекте тем : обозначение темы
   Классическая: 'classic',
   Челюсти: 'shark',
   Темная: 'dark',
+  newYear: 'newYear',
 };
 
 export const musicTrackTime: Record<ThemesNames, number> = {
   classic: 0,
   shark: 0,
   dark: 0,
+  newYear: 0,
 };
 
 export interface ThemeFlags {
   classic?: boolean;
   shark?: boolean;
   dark?: boolean;
+  newYear?: boolean;
 }
 
 export type SoundControls = {

@@ -16,6 +16,7 @@ import { maxMobileWidth } from './constant';
 import menu from '../../assets/menu.svg';
 import { BackgroundBlur } from '../../components/BackgroundBlur/BackgroundBlur';
 import { Button } from '../../components/Button/Button';
+import { setSantaGameIsStarted } from '../../redux/reducers/santaSlice';
 
 export const Game: React.FC = () => {
   const [IsGameStarted, setIsGameStarted] = useState(false);
@@ -96,6 +97,7 @@ export const Game: React.FC = () => {
   const handleThemeSelect = async () => {
     const val = selectRef.current?.value;
     const req: ThemesNames = val ? themesOptions[val] : 'classic';
+
     selectRef.current?.blur();
     canvasRef.current?.focus();
     return await dispatch(setGameTheme(req));
@@ -170,6 +172,9 @@ export const Game: React.FC = () => {
       await dispatch(setGameTheme('dark'));
       await dispatch(setDayOrNight('dark'));
     }
+  };
+  const SuntaRun = () => {
+    dispatch(setSantaGameIsStarted());
   };
 
   useEffect(() => {
@@ -247,16 +252,19 @@ export const Game: React.FC = () => {
               <li onClick={handleNightTheme}>Дневная тема</li>
             </ul>
           )}
+          {theme === 'newYear' && (
+            <ul className="game-menu__submenu">
+              <li onClick={SuntaRun}>Santa</li>
+            </ul>
+          )}
           <ul className="game-menu__submenu">
             <li className="game-menu__link game-menu__link_color-red" onClick={handleLogout}>
               Выйти
             </li>
           </ul>
-
           {isMobile && <Button onClick={handleMenuClose}> Вернуться к игре </Button>}
         </div>
       )}
-
       <div className="game-screen">
         <canvas className="game-screen__canvas" ref={canvasRef} id="canvas" width={500} height={1000}>
           {IsGameStarted && canvasRef.current && canvasRefFigure.current && (

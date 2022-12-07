@@ -8,7 +8,7 @@ export async function createTopic(props: ITopic) {
 
 // Обновление записи по id
 export async function updateTopicByID(id: number, lastReply: number) {
-  return Topic.update( {lastReply}, { where: { id } })
+  return Topic.update({ lastReply }, { where: { id } })
 }
 
 // Удаление записи по ID
@@ -23,7 +23,7 @@ export async function getTopicById(id: number) {
 
 // поиск по автору
 export async function getTopicsByAuthor(userID: number) {
-  const authorID = userID;
+  const authorID = userID
   return Topic.findAll({
     where: { authorID },
     include: [
@@ -31,8 +31,8 @@ export async function getTopicsByAuthor(userID: number) {
         model: User,
         attributes: ['firstName', 'secondName', 'avatar', 'displayName'],
         required: false,
-      }
-    ]
+      },
+    ],
   })
 }
 
@@ -40,24 +40,22 @@ export async function getTopicsByAuthor(userID: number) {
 export async function deleteAllTopics() {
   return Topic.destroy({
     where: {},
-    truncate: false
+    truncate: false,
   })
 }
 
 // Получить все записи
 export async function getAllTopics() {
-  return Topic.findAll(
-    {
-      attributes: ['title'],
-      include: [
-        {
-          model: User,
-          attributes: ['firstName', 'secondName', 'avatar', 'displayName'],
-          required: false,
-        }
-      ]
-    }
-  )
+  return Topic.findAll({
+    attributes: ['title'],
+    include: [
+      {
+        model: User,
+        attributes: ['firstName', 'secondName', 'avatar', 'displayName'],
+        required: false,
+      },
+    ],
+  })
 }
 
 // Получить все записи с возможностью пагинации
@@ -66,7 +64,7 @@ type groupTopic = {
   limit?: number
 }
 export async function getTopicsWithCount(props: groupTopic) {
-  const { offset, limit } = props;
+  const { offset, limit } = props
   return Topic.findAndCountAll({
     offset: offset || 0,
     limit: limit || 20,
@@ -74,7 +72,7 @@ export async function getTopicsWithCount(props: groupTopic) {
       {
         model: User,
         attributes: ['firstName', 'secondName', 'avatar', 'displayName'],
-      }
+      },
     ],
   })
 }
