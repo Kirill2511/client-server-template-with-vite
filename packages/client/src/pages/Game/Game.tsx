@@ -16,7 +16,7 @@ import { maxMobileWidth } from './constant';
 import menu from '../../assets/menu.svg';
 import { BackgroundBlur } from '../../components/BackgroundBlur/BackgroundBlur';
 import { Button } from '../../components/Button/Button';
-import { setSantaGameIsStarted } from '../../redux/reducers/santaSlice';
+import { store } from '../../redux/store';
 
 export const Game: React.FC = () => {
   const [IsGameStarted, setIsGameStarted] = useState(false);
@@ -173,9 +173,6 @@ export const Game: React.FC = () => {
       await dispatch(setDayOrNight('dark'));
     }
   };
-  const SuntaRun = () => {
-    dispatch(setSantaGameIsStarted());
-  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -189,6 +186,7 @@ export const Game: React.FC = () => {
       }
     }
   }, [IsGameStarted, theme, addThemeToClassName, eqMusicRef, eqSoundsRef]);
+  console.log(store.getState().santa.santaGameStarted);
 
   return (
     <div className={classNames('game', `game${addThemeToClassName}`)}>
@@ -252,11 +250,13 @@ export const Game: React.FC = () => {
               <li onClick={handleNightTheme}>Дневная тема</li>
             </ul>
           )}
-          {theme === 'newYear' && (
+          {/* {theme === 'newYear' && !santaRunTiPresent && (
             <ul className="game-menu__submenu">
-              <li onClick={SuntaRun}>Santa</li>
+              <li onClick={SuntaRun}>
+                Собрать санту в дорогу
+              </li>
             </ul>
-          )}
+          )} */}
           <ul className="game-menu__submenu">
             <li className="game-menu__link game-menu__link_color-red" onClick={handleLogout}>
               Выйти
@@ -293,14 +293,20 @@ export const Game: React.FC = () => {
           </button>
         )}
         {isGameEnded && (
-          <div className="game-screen__game-end">
-            <h3 className="game-screen__h3">Игра окончена!</h3>
-            <p>Вы добрались до {level} уровня</p>
-            <p>Ваш счет: {score} очков</p>
-            <button className="game-screen__end-button" onClick={handleNewGame}>
-              Играть снова
-            </button>
-          </div>
+          <>
+            {theme != 'newYear' ? (
+              <div className="game-screen__game-end">
+                <h3 className="game-screen__h3">Игра окончена!</h3>
+                <p>Вы добрались до {level} уровня</p>
+                <p>Ваш счет: {score} очков</p>
+                <button className="game-screen__end-button" onClick={handleNewGame}>
+                  Играть снова
+                </button>
+              </div>
+            ) : (
+              <h2 className="game-screen__h2">Мы собрали все падарки, погнали</h2>
+            )}
+          </>
         )}
       </div>
       <div className="game-info">

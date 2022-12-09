@@ -16,6 +16,16 @@
   &__h3 {
     text-align: center;
   }
+  &__h2 {
+    text-align: center;
+    width: 80%;
+    padding: 0;
+    top: 0;
+    background-color: var(--white);
+    position: absolute;
+    border-radius: 10px;
+    box-shadow: 0 0 6px 0 rgba(106, 139, 165, 0.58);
+  }
 
   &__canvas {
     height: 100%;

@@ -86,6 +86,12 @@ export class Tetris extends Component<TetrisProps> {
     x: 0,
     y: 0,
   };
+  private santaCoords = {
+    index0: 0,
+    direction0: 0,
+    x0: 0,
+    y0: 100,
+  };
   private sharkForward = true;
   private sharkStep = 10;
   private manCoords = 0;
@@ -326,6 +332,7 @@ export class Tetris extends Component<TetrisProps> {
   }
 
   private drawWorld() {
+    this.onKeypress();
     this.ctx.beginPath();
     for (let x = 0; x < this.width + 1; x++) {
       this.ctx.moveTo(this.cellSize * x, 0);
@@ -567,7 +574,6 @@ export class Tetris extends Component<TetrisProps> {
     this.themeSounds.end?.play();
     this.waterLevel = this.canvas.height - 15;
     this.drawEnd();
-
     this.themeMusic.pause();
     this.themeMusic.removeEventListener('ended', () => this.themeMusic.play());
     this.sendResults();
@@ -587,6 +593,16 @@ export class Tetris extends Component<TetrisProps> {
           this.ctx.fillRect(col * this.cellSize, row * this.cellSize, this.cellSize - 1, this.cellSize - 1);
         }
       }
+    }
+    if (this.theme === 'newYear') {
+      this.removeKeypress();
+      return startSanta(
+        this.canvas,
+        this.santaCoords.index0,
+        this.santaCoords.direction0,
+        this.santaCoords.x0,
+        this.santaCoords.y0,
+      );
     }
     if (this.theme === 'shark') {
       this.waterLevel -= 20;
@@ -646,9 +662,17 @@ export class Tetris extends Component<TetrisProps> {
     if (this.gameOver || this.paused) {
       return;
     }
-    if (this.theme === 'newYear') {
-      startSanta(this.canvas);
-    }
+    // if (this.theme === 'newYear') {
+    //   if (store.getState().santa.santaGameStarted) {
+    //     startSanta(
+    //       this.canvas,
+    //       this.santaCoords.index0,
+    //       this.santaCoords.direction0,
+    //       this.santaCoords.x0,
+    //       this.santaCoords.y0
+    //     );
+    //   }
+    // }
     // отрисовываем поле
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.drawWorld();
