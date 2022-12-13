@@ -11,6 +11,7 @@ interface IUserSlice {
   isFetching: boolean;
   fetchingFailed: boolean;
   error: string | null;
+  isFetched: boolean;
 }
 
 export interface UserChars {
@@ -55,6 +56,7 @@ const initialState: IUserSlice = {
   isFetching: false,
   fetchingFailed: false,
   error: null,
+  isFetched: false,
 };
 
 export const authSlice = createSlice({
@@ -78,7 +80,7 @@ export const authSlice = createSlice({
       state.isAuthorized = false;
       state.isFetching = false;
     },
-    [login.fulfilled.type]: (state, action) => {
+    [login.fulfilled.type]: (state) => {
       state.fetchingFailed = false;
       state.isAuthorized = true;
       state.isFetching = false;
@@ -98,6 +100,7 @@ export const authSlice = createSlice({
       state.isAuthorized = !!action.payload.id;
       state.user = convertUser(action.payload);
       state.isFetching = false;
+      state.isFetched = true;
     },
     [checkLogin.pending.type]: (state) => {
       state.fetchingFailed = true;
@@ -108,6 +111,7 @@ export const authSlice = createSlice({
       state.fetchingFailed = true;
       state.isAuthorized = false;
       state.isFetching = false;
+      state.isFetched = true;
     },
     [logout.fulfilled.type]: (state) => {
       state.isAuthorized = false;

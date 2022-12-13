@@ -1,3 +1,5 @@
+@import "../src/scss/index";
+
 .upper-menu {
   display: block;
   width: 100%;
@@ -10,9 +12,13 @@
   &__list {
     display: inline-block;
     list-style: none;
+    @media (max-width: $mobile-screen-max-width) {
+      padding: 0 10px;
+    }
   }
 
   &__theme {
+    display: inline-block;
     font-weight: bold;
   }
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect } from 'react';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import './scss/index.scss';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
@@ -26,16 +26,16 @@ const ForumThreadPage = React.lazy(() => import('./pages/Forum/ForumThreadPage/F
 
 function App() {
   const dispatch = useAppDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const isLoaded = useAppSelector((state) => state.auth.isFetched);
+
   const theme = useAppSelector((state) => state.theme.active);
   const addThemeToClassName = `_theme_${theme}`;
 
   useEffect(() => {
     (async () => {
       await dispatch(checkLogin());
-      setIsLoaded(true);
     })();
-  }, [dispatch, isLoaded]);
+  }, [dispatch]);
 
   useEffect(() => {
     const themeVar = theme === 'dark' ? 'dark' : 'light';
