@@ -8,9 +8,15 @@ import jaws from './music/jaws.mp3';
 
 import NewYear from './img/background/NY-BG.jpg';
 import santa from './img/background/123.jpg';
+import santaLeft from './img/background/123-mirrow.png';
+import santaEnd from './img/background/444.png';
+import santaStart from './img/background/555.png';
 
 export const Santa: Record<string, string> = {
   santa: santa,
+  santaL: santaLeft,
+  santaSled: santaStart,
+  santaE: santaEnd,
 };
 
 export const NYsharkMusic = jaws;
@@ -23,7 +29,7 @@ export const NYsharkSounds = {
   line: swirl,
 };
 
-export const NYsharkBackground = NewYear;
+export const NewYearBackground = NewYear;
 
 export const NYsharkStroke = '#EEEEEE';
 

@@ -29,7 +29,7 @@ import {
   lightThemeBackground,
 } from './classic/classic-theme';
 import { man, shark, sharkBackground, sharkMusic, sharkSounds, sharkStroke } from './shark/shark-theme';
-import { Santa, NYsharkBackground, NYsharkMusic, NYsharkSounds, NYsharkStroke } from './newYear/new-year';
+import { Santa, NewYearBackground, NYsharkMusic, NYsharkSounds, NYsharkStroke } from './newYear/new-year';
 
 export type StringObject = Record<string, string>;
 
@@ -72,7 +72,7 @@ export const themes: Record<string, ThemeProps> = {
       // картинки для анимации
       santa: Santa,
     },
-    backgroundImg: NYsharkBackground, // картинка на фон
+    backgroundImg: NewYearBackground, // картинка на фон
     themeStroke: NYsharkStroke,
   },
   classic: {

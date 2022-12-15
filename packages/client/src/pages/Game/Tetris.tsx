@@ -79,18 +79,17 @@ export class Tetris extends Component<TetrisProps> {
   private userName: string;
   private userAvatar: string;
   private userID: number;
-
+  private santaCoords = {
+    index0: 0,
+    direction0: 0,
+    x0: 350,
+    y0: 20,
+  };
   // shark theme
   private manPic = 0;
   private sharkCoords = {
     x: 0,
     y: 0,
-  };
-  private santaCoords = {
-    index0: 0,
-    direction0: 0,
-    x0: 0,
-    y0: 100,
   };
   private sharkForward = true;
   private sharkStep = 10;
@@ -348,7 +347,16 @@ export class Tetris extends Component<TetrisProps> {
     this.ctx.fillStyle = fillGameCanvas;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
-
+  private drawSanta() {
+    this.removeKeypress();
+    startSanta(
+      this.canvas,
+      this.santaCoords.index0,
+      this.santaCoords.direction0,
+      this.santaCoords.x0,
+      this.santaCoords.y0,
+    );
+  }
   // BEGIN для акул
 
   private drawWater(end: number) {
@@ -535,7 +543,9 @@ export class Tetris extends Component<TetrisProps> {
         }
       }
     }
-    for (let row = this.playfield.length - 1; row >= 0; ) {
+    /* eslint-disable */
+    for (let row = this.playfield.length - 1; row >= 0;) {
+      /* eslint-enable */
       // убираем линию
       if (this.playfield[row].every((cell) => !!cell)) {
         this.themeSounds.line?.play();
@@ -579,7 +589,9 @@ export class Tetris extends Component<TetrisProps> {
     this.sendResults();
     this.gameOver = true;
     this.gameStarted = false;
-    this.sendEnd();
+    if (this.theme != 'newYear') {
+      this.sendEnd();
+    }
   }
 
   // отрисовка окончания игры
@@ -595,14 +607,10 @@ export class Tetris extends Component<TetrisProps> {
       }
     }
     if (this.theme === 'newYear') {
-      this.removeKeypress();
-      return startSanta(
-        this.canvas,
-        this.santaCoords.index0,
-        this.santaCoords.direction0,
-        this.santaCoords.x0,
-        this.santaCoords.y0,
-      );
+      this.drawSanta();
+      // setTimeout(() => {
+      //   this.drawSantaEnd();
+      // }, 5000);
     }
     if (this.theme === 'shark') {
       this.waterLevel -= 20;
@@ -662,17 +670,6 @@ export class Tetris extends Component<TetrisProps> {
     if (this.gameOver || this.paused) {
       return;
     }
-    // if (this.theme === 'newYear') {
-    //   if (store.getState().santa.santaGameStarted) {
-    //     startSanta(
-    //       this.canvas,
-    //       this.santaCoords.index0,
-    //       this.santaCoords.direction0,
-    //       this.santaCoords.x0,
-    //       this.santaCoords.y0
-    //     );
-    //   }
-    // }
     // отрисовываем поле
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.drawWorld();
