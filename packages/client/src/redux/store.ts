@@ -1,4 +1,3 @@
-import { santaSlice } from './reducers/santaSlice';
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import { themeSlice } from './reducers/themeSlice';
 import { authSlice, leadersSlice } from './reducers/userSlice';
@@ -8,7 +7,6 @@ export const store = configureStore({
     auth: authSlice.reducer,
     leaders: leadersSlice.reducer,
     theme: themeSlice.reducer,
-    santa: santaSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

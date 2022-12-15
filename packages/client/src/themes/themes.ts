@@ -29,7 +29,7 @@ import {
   lightThemeBackground,
 } from './classic/classic-theme';
 import { man, shark, sharkBackground, sharkMusic, sharkSounds, sharkStroke } from './shark/shark-theme';
-import { Santa, NewYearBackground, NYsharkMusic, NYsharkSounds, NYsharkStroke } from './newYear/new-year';
+import { NewYearBackground, NYStroke, NYMusic, NYsounds } from './newYear/new-year';
 
 export type StringObject = Record<string, string>;
 
@@ -49,6 +49,7 @@ export interface ThemeSounds {
   fall?: string; // быстрая установка (пробел)
   position?: string; // обычная установка
   line?: string; // собран ряд
+  steps?: string; // for New-Year theme
 }
 
 export const themes: Record<string, ThemeProps> = {
@@ -66,14 +67,10 @@ export const themes: Record<string, ThemeProps> = {
   },
   newYear: {
     // обозначение темы
-    sounds: NYsharkSounds, // звуки в формате ThemeSounds
-    music: NYsharkMusic, // музыкальная запись 1 штука
-    images: {
-      // картинки для анимации
-      santa: Santa,
-    },
+    sounds: NYsounds, // звуки в формате ThemeSounds
+    music: NYMusic, // музыкальная запись 1 штука
     backgroundImg: NewYearBackground, // картинка на фон
-    themeStroke: NYsharkStroke,
+    themeStroke: NYStroke,
   },
   classic: {
     sounds: classicSounds,

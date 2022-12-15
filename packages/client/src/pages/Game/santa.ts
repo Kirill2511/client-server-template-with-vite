@@ -1,22 +1,37 @@
-import santaRigth from '../../themes/newYear/img/background/123.jpg';
-import santaLeft from '../../themes/newYear/img/background/123-mirrow.png';
-import santaEnd from '../../themes/newYear/img/background/444.png';
-import santaStart from '../../themes/newYear/img/background/555.png';
-export const startSanta = (canvas: HTMLCanvasElement, index0: number, direction0: number, x0: number, y0: number) => {
+import santaRigth from '../../themes/newYear/img/santa/santa-rigth.jpg';
+import santaLeft from '../../themes/newYear/img/santa/santa-left.png';
+import santaEnd from '../../themes/newYear/img/santa/santa-end.png';
+import santaStart from '../../themes/newYear/img/santa/santa-sani.png';
+import finall from '../../themes/newYear/img/background/fin.jpg';
+export const startSanta = (
+  canvas: HTMLCanvasElement,
+  index0: number,
+  direction0: number,
+  x0: number,
+  y0: number,
+  steps: HTMLAudioElement,
+) => {
   const context = canvas.getContext('2d') as CanvasRenderingContext2D;
   let index = index0;
   let direction = direction0;
   let x = x0;
   let y = y0;
   let isStart = true;
+  let isSantaMove = false;
   const init = () => {
     document.addEventListener('keydown', handleMove);
+    document.addEventListener('keyup', santaMove);
     setInterval(anim, 10);
   };
   let santaImg = santaRigth;
 
   function update() {
     if (context && isStart) {
+      if (isSantaMove) {
+        steps.play();
+      } else {
+        steps.pause();
+      }
       const santa = new Image();
       santa.src = santaImg;
       context.fillStyle = 'black';
@@ -29,6 +44,7 @@ export const startSanta = (canvas: HTMLCanvasElement, index0: number, direction0
       } else if (santaImg === santaLeft) {
         context.drawImage(santa, index * 150, direction * 150, 150, 150, x, y, 150, 150);
       } else if (santaImg === santaEnd) {
+        isSantaMove = false;
         const move = () => {
           for (let i = 0; i < 200; i += 5) {
             x += i / 500;
@@ -36,8 +52,10 @@ export const startSanta = (canvas: HTMLCanvasElement, index0: number, direction0
           }
           setTimeout(() => {
             isStart = false;
+            const fin = new Image();
+            fin.src = finall;
             context.clearRect(0, 0, canvas.width, canvas.height);
-            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(fin, 0, 0, context.canvas.width, context.canvas.height);
           }, 1000);
         };
 
@@ -55,7 +73,6 @@ export const startSanta = (canvas: HTMLCanvasElement, index0: number, direction0
       context.drawImage(canvas, 0, 0, context.canvas.width, context.canvas.height);
     }
   }
-
   const end = (x0: number, y0: number) => {
     x = x0;
     y = y0;
@@ -63,6 +80,7 @@ export const startSanta = (canvas: HTMLCanvasElement, index0: number, direction0
     direction = 0;
     santaImg = santaEnd;
     document.removeEventListener('keydown', handleMove);
+    document.removeEventListener('keyup', santaMove);
   };
   // Main animation loop
   function anim() {
@@ -82,6 +100,7 @@ export const startSanta = (canvas: HTMLCanvasElement, index0: number, direction0
         }
         if (y > 0) {
           y -= 2;
+          isSantaMove = true;
         }
         break;
       }
@@ -96,6 +115,7 @@ export const startSanta = (canvas: HTMLCanvasElement, index0: number, direction0
         }
         if (y + 64 < context.canvas.height - 75) {
           y += 15;
+          isSantaMove = true;
         }
         break;
       }
@@ -111,6 +131,7 @@ export const startSanta = (canvas: HTMLCanvasElement, index0: number, direction0
         santaImg = santaLeft;
         if (x > 0) {
           x -= 5;
+          isSantaMove = true;
         }
         break;
       }
@@ -126,10 +147,14 @@ export const startSanta = (canvas: HTMLCanvasElement, index0: number, direction0
         santaImg = santaRigth;
         if (x + 75 < context.canvas.width - 35) {
           x += 5;
+          isSantaMove = true;
         }
         break;
       }
     }
   };
+  function santaMove() {
+    isSantaMove = false;
+  }
   return init();
 };

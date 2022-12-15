@@ -64,6 +64,7 @@ export class Tetris extends Component<TetrisProps> {
     fall?: HTMLAudioElement;
     line?: HTMLAudioElement;
     position?: HTMLAudioElement;
+    steps?: HTMLAudioElement;
   } = {};
   private musicVolume = '1';
   private soundVolume = '1';
@@ -349,12 +350,14 @@ export class Tetris extends Component<TetrisProps> {
   }
   private drawSanta() {
     this.removeKeypress();
+    const steps = this.themeSounds.steps as HTMLAudioElement;
     startSanta(
       this.canvas,
       this.santaCoords.index0,
       this.santaCoords.direction0,
       this.santaCoords.x0,
       this.santaCoords.y0,
+      steps,
     );
   }
   // BEGIN для акул
@@ -543,9 +546,7 @@ export class Tetris extends Component<TetrisProps> {
         }
       }
     }
-    /* eslint-disable */
-    for (let row = this.playfield.length - 1; row >= 0;) {
-      /* eslint-enable */
+    for (let row = this.playfield.length - 1; row >= 0; ) {
       // убираем линию
       if (this.playfield[row].every((cell) => !!cell)) {
         this.themeSounds.line?.play();
@@ -608,9 +609,6 @@ export class Tetris extends Component<TetrisProps> {
     }
     if (this.theme === 'newYear') {
       this.drawSanta();
-      // setTimeout(() => {
-      //   this.drawSantaEnd();
-      // }, 5000);
     }
     if (this.theme === 'shark') {
       this.waterLevel -= 20;
