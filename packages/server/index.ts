@@ -16,6 +16,9 @@ import leaderRouter from './routes/leaderRoutes'
 // @ts-ignore
 import { render } from '../client/dist/ssr/entry-server.cjs'
 
+const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
+  process.env
+
 dotenv.config()
 
 const app = express()
@@ -28,6 +31,37 @@ app.use('/api/user', userRouter)
 app.use('/api/theme', themeRouter)
 app.use('/api/forum', forumRouter)
 app.use('/api/leaderboard', leaderRouter)
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const pg = require('pg')
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const expressSession = require('express-session')
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const pgSession = require('connect-pg-simple')(expressSession)
+
+const pgPool = new pg.Pool({
+  host: 'localhost',
+  user: POSTGRES_USER,
+  password: POSTGRES_PASSWORD,
+  database: POSTGRES_DB,
+  port: Number(POSTGRES_PORT),
+  ssl: false,
+})
+
+app.use(
+  expressSession({
+    // eslint-disable-next-line new-cap
+    store: new pgSession({
+      pool: pgPool, // Connection pool
+      tableName: 'user_sessions', // Use another table-name than the default "session" one
+      createTableIfMissing: true,
+    }),
+    secret: 'postgres',
+    resave: false,
+    cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+    // Insert express-session options here
+  })
+)
 
 startApp()
 
