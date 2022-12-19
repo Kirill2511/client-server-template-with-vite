@@ -16,7 +16,7 @@ import leaderRouter from './routes/leaderRoutes'
 // @ts-ignore
 import { render } from '../client/dist/ssr/entry-server.cjs'
 import type { Session, SessionData } from 'express-session'
-import { getTheSess } from './app/models/userSession'
+import { getAllSessions } from './app/models/userSession'
 
 export type SessionReq = Request & {
     session: Session & Partial<SessionData> & { userID?: number };
@@ -26,8 +26,8 @@ const sID = {
   sid: '',
 }
 
-// const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
-//   process.env
+const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
+  process.env
 
 dotenv.config()
 
@@ -43,45 +43,30 @@ app.use('/api/forum', forumRouter)
 app.use('/api/leaderboard', leaderRouter)
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-// const pg = require('pg')
+const pg = require('pg')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const expressSession = require('express-session')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-// const pgSession = require('connect-pg-simple')(expressSession)
+const pgSession = require('connect-pg-simple')(expressSession)
 
-// const pgPool = new pg.Pool({
-//   host: 'localhost',
-//   user: POSTGRES_USER,
-//   password: POSTGRES_PASSWORD,
-//   database: POSTGRES_DB,
-//   port: Number(POSTGRES_PORT),
-//   ssl: false,
-// })
-
-// export const sessionStore = new pgSession({
-//   pool: pgPool, // Connection pool
-//   tableName: 'user_sessions', // Use another table-name than the default "session" one
-//   // tableName: 'UserSessions',
-//   createTableIfMissing: false,
-// })
-
-export const sessionStore = new expressSession.MemoryStore();
-
-// app.use(
-//   expressSession({
-//     // eslint-disable-next-line new-cap
-//     store: sessionStore,
-//     secret: 'postgres',
-//     resave: false,
-//     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
-//     // Insert express-session options here
-//   })
-// )
-
+const pgPool = new pg.Pool({
+  host: 'localhost',
+  user: POSTGRES_USER,
+  password: POSTGRES_PASSWORD,
+  database: POSTGRES_DB,
+  port: Number(POSTGRES_PORT),
+  ssl: false,
+})
 app.use(
   expressSession({
     // eslint-disable-next-line new-cap
-    store: sessionStore,
+    store: new pgSession({
+      pool: pgPool, // Connection pool
+      // tableName: 'user_sessions', // Use another table-name than the default "session" one
+      tableName: 'UserSessions',
+      // schemaName: 'UserSessions',
+      createTableIfMissing: true,
+    }),
     secret: 'postgres',
     resave: false,
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
@@ -111,14 +96,9 @@ app.post('/login123', (req: SessionReq, res) => {
   res.redirect('/');
 })
 
-app.get('/gimme', getTheSess)
+app.get('/gimme', getAllSessions)
 
 app.use(express.static(path.resolve(__dirname, '../client/dist/client')))
-
-// app.get('/logout',(req,res) => {
-//   req.session.destroy();
-//   res.redirect('/');
-// });
 
 app.listen(port, () => {
   console.log(`  ➜ 🎸 Server is listening on port: ${port}`)
