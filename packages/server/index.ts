@@ -57,6 +57,7 @@ const pgPool = new pg.Pool({
   port: Number(POSTGRES_PORT),
   ssl: false,
 })
+
 app.use(
   expressSession({
     // eslint-disable-next-line new-cap
