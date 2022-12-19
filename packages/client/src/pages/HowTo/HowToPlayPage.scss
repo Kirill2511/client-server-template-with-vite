@@ -13,7 +13,7 @@
         @media (max-width: $mobile-screen-max-width) {
             margin: 0;
             padding: 10px 30px;
-            max-height: none;
+            max-height: calc(100vh - 200px);
         }
     }
 
