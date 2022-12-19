@@ -62,9 +62,7 @@ app.use(
     // eslint-disable-next-line new-cap
     store: new pgSession({
       pool: pgPool, // Connection pool
-      // tableName: 'user_sessions', // Use another table-name than the default "session" one
-      tableName: 'UserSessions',
-      // schemaName: 'UserSessions',
+      tableName: 'user_sessions', // Use another table-name than the default "session" one
       createTableIfMissing: true,
     }),
     secret: 'postgres',
