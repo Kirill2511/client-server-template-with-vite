@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import cors from 'cors'
-import express from 'express'
+import express, { Request } from 'express'
 import * as path from 'path'
 import * as fs from 'fs'
 import bodyParser from 'body-parser'
@@ -15,9 +15,19 @@ import leaderRouter from './routes/leaderRoutes'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { render } from '../client/dist/ssr/entry-server.cjs'
+import type { Session, SessionData } from 'express-session'
+import { getTheSess } from './app/models/userSession'
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
-  process.env
+export type SessionReq = Request & {
+    session: Session & Partial<SessionData> & { userID?: number };
+  };
+
+const sID = {
+  sid: '',
+}
+
+// const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
+//   process.env
 
 dotenv.config()
 
@@ -33,29 +43,45 @@ app.use('/api/forum', forumRouter)
 app.use('/api/leaderboard', leaderRouter)
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const pg = require('pg')
+// const pg = require('pg')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const expressSession = require('express-session')
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const pgSession = require('connect-pg-simple')(expressSession)
+// const pgSession = require('connect-pg-simple')(expressSession)
 
-const pgPool = new pg.Pool({
-  host: 'localhost',
-  user: POSTGRES_USER,
-  password: POSTGRES_PASSWORD,
-  database: POSTGRES_DB,
-  port: Number(POSTGRES_PORT),
-  ssl: false,
-})
+// const pgPool = new pg.Pool({
+//   host: 'localhost',
+//   user: POSTGRES_USER,
+//   password: POSTGRES_PASSWORD,
+//   database: POSTGRES_DB,
+//   port: Number(POSTGRES_PORT),
+//   ssl: false,
+// })
+
+// export const sessionStore = new pgSession({
+//   pool: pgPool, // Connection pool
+//   tableName: 'user_sessions', // Use another table-name than the default "session" one
+//   // tableName: 'UserSessions',
+//   createTableIfMissing: false,
+// })
+
+export const sessionStore = new expressSession.MemoryStore();
+
+// app.use(
+//   expressSession({
+//     // eslint-disable-next-line new-cap
+//     store: sessionStore,
+//     secret: 'postgres',
+//     resave: false,
+//     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+//     // Insert express-session options here
+//   })
+// )
 
 app.use(
   expressSession({
     // eslint-disable-next-line new-cap
-    store: new pgSession({
-      pool: pgPool, // Connection pool
-      tableName: 'user_sessions', // Use another table-name than the default "session" one
-      createTableIfMissing: true,
-    }),
+    store: sessionStore,
     secret: 'postgres',
     resave: false,
     cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
@@ -73,8 +99,29 @@ app.get('/', (_, res) => {
   res.send(newString)
 })
 
+app.post('/login123', (req: SessionReq, res) => {
+  console.log(req.body, 'BODY');
+  const { id } = req.body;
+  req.session.userID = Number(id);
+  sID.sid = req.session.id;
+  req.session.save((err) => console.log(err));
+  console.log(req.session, req.session.id);
+
+  console.log(sID, 'SESSION ID');
+  res.redirect('/');
+})
+
+app.get('/gimme', getTheSess)
+
 app.use(express.static(path.resolve(__dirname, '../client/dist/client')))
+
+// app.get('/logout',(req,res) => {
+//   req.session.destroy();
+//   res.redirect('/');
+// });
 
 app.listen(port, () => {
   console.log(`  ➜ 🎸 Server is listening on port: ${port}`)
 })
+
+export default sID;

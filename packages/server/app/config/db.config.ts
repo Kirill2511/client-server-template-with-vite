@@ -6,6 +6,7 @@ import { topicModel } from '../models/topic'
 import { postModel } from '../models/post'
 import { likesModel } from '../models/likes'
 import { leaderModel } from '../models/leader'
+import { UserSessionModel } from '../models/userSession'
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } =
   process.env
@@ -34,6 +35,10 @@ export const Post = sequelize.define('Post', postModel, {})
 export const Reaction = sequelize.define('Reaction', likesModel, {})
 
 export const Leader = sequelize.define('Leader', leaderModel, {})
+
+export const UserSession = sequelize.define('UserSession', UserSessionModel, {})
+
+export const user_session = sequelize.define('user_session', {})
 
 // отношения
 User.hasMany(Topic, {

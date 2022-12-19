@@ -24,7 +24,8 @@
     ],
     "types": [
       "node",
-      "jest"
+      "jest",
+      "express-session"
     ],
     "baseUrl": ".",
     "paths": {
@@ -32,6 +33,7 @@
         "types/*"
       ]
     },
+    "typeRoots" : ["./../node_modules/@types"], 
     "outDir": "dist",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true

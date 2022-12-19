@@ -1,15 +1,27 @@
 import { processResult } from '../utils/processResult'
 import type { Request, Response } from 'express'
 import * as postFuncs from '../funcs/postFunctions'
+import { getID } from './../../app/utils/getID'
 
 // создать пост - POST
 export const createNewPost = async (req: Request, res: Response) => {
   const { authorID, message, parentID, firstLevel, hide } = req.body
   const { topicID } = req.params
+  const sess = getID();
+  console.log(sess, 'СЕССИЯ');
   await processResult(() => {
     return postFuncs.createPost({ authorID, topicID: Number(topicID), message, parentID, firstLevel, hide })
   }, res, 'Some error occurred while creating the post.');
 }
+
+// export const createNewPost = async (req: Request, res: Response) => {
+//   const { message, parentID, firstLevel, hide } = req.body
+//   const { topicID } = req.params
+//   const authorID = userID;
+//   await processResult(() => {
+//     return postFuncs.createPost({ authorID, topicID: Number(topicID), message, parentID, firstLevel, hide })
+//   }, res, 'Some error occurred while creating the post.');
+// }
 
 // получить список постов темы с пагинацией - параметры в урл
 export const getPostListForTopic = async (req: Request, res: Response) => {

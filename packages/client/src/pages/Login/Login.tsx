@@ -14,6 +14,7 @@ import { setTheme } from '../../redux/actions/themeActions';
 import { UpperMenuGuest } from '../../components/UpperMenu/_guest/UpperMenuGuest';
 import { getServiceId } from '../../utils/api';
 import { REDIRECT_URI } from '../../utils/constants';
+import { store } from '../../redux/store';
 
 export type LoginForm = {
   login: string;
@@ -40,8 +41,19 @@ const Login = () => {
     e.preventDefault();
     const res = await dispatch(login(form));
     if (res.meta.requestStatus === 'fulfilled') {
-      await dispatch(checkLogin());
+      await dispatch(checkLogin()).then(() => {
+        console.log(store.getState());
+        const user = store.getState().auth.user;
+        console.log(JSON.stringify(user));
+        fetch('http://localhost:3001/login123', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(user),
+        });
+      });
       await dispatch(setTheme());
+      console.log('111111');
+
       navigate('/game');
     } else {
       setFormError(`Ошибка входа. ${(res.payload as Error)?.message}`);
