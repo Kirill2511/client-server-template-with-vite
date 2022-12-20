@@ -18,10 +18,11 @@ export const startSanta = (
   let y = y0;
   let isStart = true;
   let isSantaMove = false;
+  let interval: string | number | NodeJS.Timeout | undefined;
   const init = () => {
     document.addEventListener('keydown', handleMove);
     document.addEventListener('keyup', santaMove);
-    setInterval(anim, 10);
+    interval = setInterval(anim, 10);
   };
   let santaImg = santaRigth;
 
@@ -81,6 +82,7 @@ export const startSanta = (
     santaImg = santaEnd;
     document.removeEventListener('keydown', handleMove);
     document.removeEventListener('keyup', santaMove);
+    clearInterval(interval);
   };
   // Main animation loop
   function anim() {
