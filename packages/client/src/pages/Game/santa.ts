@@ -57,6 +57,7 @@ export const startSanta = (
             fin.src = finall;
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.drawImage(fin, 0, 0, context.canvas.width, context.canvas.height);
+            clearInterval(interval);
           }, 1000);
         };
 
@@ -82,7 +83,6 @@ export const startSanta = (
     santaImg = santaEnd;
     document.removeEventListener('keydown', handleMove);
     document.removeEventListener('keyup', santaMove);
-    clearInterval(interval);
   };
   // Main animation loop
   function anim() {
