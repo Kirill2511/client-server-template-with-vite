@@ -69,7 +69,7 @@ export const Game: React.FC = () => {
       setSentUser(true);
       setTimeout(() => {
         dispatch(setTheme());
-      }, 2000);
+      }, 500);
     }
   }, [dispatch, isSentUser]);
 
